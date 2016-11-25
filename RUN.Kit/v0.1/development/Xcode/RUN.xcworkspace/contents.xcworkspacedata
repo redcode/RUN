@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:RUN (macOS).xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:RUN (iOS).xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:RUN (tvOS).xcodeproj">
+   </FileRef>
+</Workspace>
