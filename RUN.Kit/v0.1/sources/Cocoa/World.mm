@@ -1,6 +1,6 @@
 /* RUN - Cocoa/World.mm
-  ______ __ ______  ___
- /   - //  /  /   \/  /
+  _____  __ ______  ___
+ /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
 Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
@@ -15,47 +15,16 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <Z/types/base.h>
 #import <Z/classes/base/Status.hpp>
 #import <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
+#import <Z/formats/keymap/Mac OS.h>
+#import <Z/formats/keymap/Z.h>
 
 #define VIEW ((_RUNGLView *)native_context)
 
 using namespace RUN;
 
-#define _(CODE) Keyboard::Key::CODE
+#define _(key) Keyboard::Key::key
 
-static UInt8 const keymap[128] = {
-	_(ANSI_A	   ), _(ANSI_S			     ), _(ANSI_D		   ), _(ANSI_F		    ),
-	_(ANSI_H	   ), _(ANSI_G			     ), _(ANSI_Z		   ), _(ANSI_X		    ),
-	_(ANSI_C	   ), _(ANSI_V			     ), _(ISO_SECTION		   ), _(ANSI_B		    ),
-	_(ANSI_Q	   ), _(ANSI_W			     ), _(ANSI_E		   ), _(ANSI_R		    ),
-	_(ANSI_Y	   ), _(ANSI_T			     ), _(ANSI_1		   ), _(ANSI_2		    ),
-	_(ANSI_3	   ), _(ANSI_4			     ), _(ANSI_6		   ), _(ANSI_5		    ),
-	_(ANSI_EQUALS_SIGN ), _(ANSI_9			     ), _(ANSI_7		   ), _(ANSI_HYPHEN_MINUS   ),
-	_(ANSI_8	   ), _(ANSI_0			     ), _(ANSI_RIGHT_SQUARE_BRACKET), _(ANSI_O		    ),
-	_(ANSI_U	   ), _(ANSI_LEFT_SQUARE_BRACKET     ), _(ANSI_I		   ), _(ANSI_P		    ),
-	_(RETURN	   ), _(ANSI_L			     ), _(ANSI_J		   ), _(ANSI_APOSTROPHE	    ),
-	_(ANSI_K	   ), _(ANSI_SEMICOLON		     ), _(ANSI_REVERSE_SOLIDUS	   ), _(ANSI_COMMA	    ),
-	_(ANSI_SOLIDUS	   ), _(ANSI_N			     ), _(ANSI_M		   ), _(ANSI_FULL_STOP	    ),
-	_(TAB		   ), _(SPACE			     ), _(ANSI_GRAVE_ACCENT	   ), _(BACKSPACE	    ),
-	_(INVALID	   ), _(ESCAPE			     ), _(RIGHT_COMMAND		   ), _(LEFT_COMMAND	    ),
-	_(LEFT_SHIFT	   ), _(CAPS_LOCK		     ), _(LEFT_OPTION		   ), _(LEFT_CONTROL	    ),
-	_(RIGHT_SHIFT	   ), _(RIGHT_OPTION		     ), _(RIGHT_CONTROL		   ), _(FUNCTION	    ),
-	_(APPLE_F17	   ), _(ANSI_KEYPAD_DECIMAL_SEPARATOR), _(INVALID		   ), _(ANSI_KEYPAD_ASTERISK),
-	_(INVALID	   ), _(ANSI_KEYPAD_PLUS_SIGN	     ), _(INVALID		   ), _(ANSI_KEYPAD_NUM_LOCK),
-	_(INVALID	   ), _(INVALID			     ), _(INVALID		   ), _(ANSI_KEYPAD_SOLIDUS ),
-	_(ANSI_KEYPAD_ENTER), _(INVALID			     ), _(ANSI_KEYPAD_HYPHEN_MINUS ), _(APPLE_F18	    ),
-	_(APPLE_F19	   ), _(APPLE_ANSI_KEYPAD_EQUALS_SIGN), _(ANSI_KEYPAD_0		   ), _(ANSI_KEYPAD_1	    ),
-	_(ANSI_KEYPAD_2	   ), _(ANSI_KEYPAD_3		     ), _(ANSI_KEYPAD_4		   ), _(ANSI_KEYPAD_5	    ),
-	_(ANSI_KEYPAD_6	   ), _(ANSI_KEYPAD_7		     ), _(APPLE_F20		   ), _(ANSI_KEYPAD_8	    ),
-	_(ANSI_KEYPAD_9	   ), _(JIS_YEN_SIGN		     ), _(JIS_LOW_LINE		   ), _(JIS_KEYPAD_COMMA    ),
-	_(F5		   ), _(F6			     ), _(F7			   ), _(F3		    ),
-	_(F8		   ), _(F9			     ), _(JIS_EISU		   ), _(F11		    ),
-	_(JIS_KANA	   ), _(PRINT_SCREEN		     ), _(APPLE_F16		   ), _(SCROLL_LOCK	    ),
-	_(INVALID	   ), _(F10			     ), _(APPLICATION		   ), _(F12		    ),
-	_(INVALID	   ), _(PAUSE			     ), _(INSERT		   ), _(HOME		    ),
-	_(PAGE_UP	   ), _(DELETE			     ), _(F4			   ), _(END		    ),
-	_(F2		   ), _(PAGE_DOWN		     ), _(F1			   ), _(LEFT		    ),
-	_(RIGHT		   ), _(DOWN			     ), _(UP			   ), _(INVALID		    )
-};
+static UInt8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE};
 
 
 @interface _RUNView : NSView {
@@ -151,36 +120,36 @@ static UInt8 const keymap[128] = {
 		UInt32 keys = UInt32(event.modifierFlags);
 		UInt32 changed = _modifier_keys ^ keys;
 
-		enum {	CAPS_LOCK     = 0x010000,
-			/*SHIFT	      = 0x020000,
-			CONTROL	      = 0x040000,
-			OPTION	      = 0x080000,
-			COMMAND	      = 0x100000,*/
-			LEFT_SHIFT    = 0x000002,
-			RIGHT_SHIFT   = 0x000004,
-			LEFT_CONTROL  = 0x000001,
-			RIGHT_CONTROL = 0x002000,
-			LEFT_OPTION   = 0x000020,
-			RIGHT_OPTION  = 0x000040,
-			LEFT_COMMAND  = 0x000008,
-			RIGHT_COMMAND = 0x000010
+		enum {	CapsLock     = 0x010000,
+			/*Shift	     = 0x020000,
+			Control	     = 0x040000,
+			Option	     = 0x080000,
+			Command	     = 0x100000,*/
+			LeftShift    = 0x000002,
+			RightShift   = 0x000004,
+			LeftControl  = 0x000001,
+			RightControl = 0x002000,
+			LeftOption   = 0x000020,
+			RightOption  = 0x000040,
+			LeftCommand  = 0x000008,
+			RightCommand = 0x000010
 		};
 
-#		define HANDLE_KEY(KEY) if (changed & KEY)			  \
+#		define HANDLE_KEY(key) if (changed & key)			  \
 			{							  \
-			if (keys & KEY) world->keyboard_down(Keyboard::Key::KEY); \
-			else		world->keyboard_up  (Keyboard::Key::KEY); \
+			if (keys & key) world->keyboard_down(Keyboard::Key::key); \
+			else		world->keyboard_up  (Keyboard::Key::key); \
 			}
 
-		HANDLE_KEY(CAPS_LOCK	)
-		HANDLE_KEY(LEFT_SHIFT	)
-		HANDLE_KEY(LEFT_CONTROL	)
-		HANDLE_KEY(LEFT_OPTION	)
-		HANDLE_KEY(LEFT_COMMAND	)
-		HANDLE_KEY(RIGHT_SHIFT	)
-		HANDLE_KEY(RIGHT_CONTROL)
-		HANDLE_KEY(RIGHT_OPTION	)
-		HANDLE_KEY(RIGHT_COMMAND)
+		HANDLE_KEY(CapsLock    )
+		HANDLE_KEY(LeftShift   )
+		HANDLE_KEY(LeftControl )
+		HANDLE_KEY(LeftOption  )
+		HANDLE_KEY(LeftCommand )
+		HANDLE_KEY(RightShift  )
+		HANDLE_KEY(RightControl)
+		HANDLE_KEY(RightOption )
+		HANDLE_KEY(RightCommand)
 
 #		undef HANDLE_KEY
 

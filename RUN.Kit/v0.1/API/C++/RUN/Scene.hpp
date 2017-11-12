@@ -1,6 +1,6 @@
 /* RUN Kit C++ API - Scene.hpp
-  ______ __ ______  ___
- /   - //  /  /   \/  /
+  _____  __ ______  ___
+ /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
 Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
@@ -11,9 +11,11 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/Node.hpp>
 
 
-class RUN_API RUN::Scene : public RUN::Node {
+namespace RUN {class RUN_API Scene : public Node {
 
-	public: struct Transition {
+	public:
+
+	struct Transition {
 		typedef Function<void(Scene *from, Scene *to, Real t)> Update;
 		typedef Function<void(Scene *from, Scene *to, Boolean cancelled)> End;
 
@@ -34,7 +36,7 @@ class RUN_API RUN::Scene : public RUN::Node {
 	virtual void initialize();
 
 	void update(Real t);
-};
+};}
 
 
 #endif // __RUN_Scene_HPP__
