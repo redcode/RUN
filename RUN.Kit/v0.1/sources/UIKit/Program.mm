@@ -17,6 +17,10 @@ using namespace RUN;
 static NSAutoreleasePool *pool;
 
 
+@interface _RUNApplication : UIApplication @end
+@implementation _RUNApplication @end
+
+
 @interface _RUNApplicationDelegate : UIResponder <UIApplicationDelegate> {
 	UIWindow* _window;
 }
@@ -36,16 +40,22 @@ static NSAutoreleasePool *pool;
 		}
 
 
-	- (BOOL) application:			 (UIApplication *) application
-		 willFinishLaunchingWithOptions: (NSDictionary	*) optiona
+	- (BOOL) application:			 (_RUNApplication *) application
+		 willFinishLaunchingWithOptions: (NSDictionary	  *) optiona
 		{
 		[application setStatusBarStyle: UIStatusBarStyleDefault];
-		 Program::singleton->will_start();
-		 return YES;
-		 }
+		Program::singleton->will_start();
+		return YES;
+		}
 
 
-	- (BOOL) application: (id) a didFinishLaunchingWithOptions:  (id) o {Program::singleton->did_start (); return YES;}
+	- (BOOL) application:			(_RUNApplication) application
+		 didFinishLaunchingWithOptions: (NSDictionary  *) options
+		{
+		Program::singleton->did_start();
+		return YES;
+		}
+
 
 	- (void) applicationWillResignActive:	 (id) _ {Program::singleton->will_enter_background();}
 	- (void) applicationDidEnterBackground:	 (id) _ {Program::singleton->did_enter_background ();}
@@ -148,10 +158,9 @@ Program::~Program()
 	singleton = NULL;
 	}
 
+
 void Program::run()
-	{
-	UIApplicationMain(argc, argv, nil, NSStringFromClass([_RUNApplicationDelegate class]));
-	}
+	{UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");}
 
 
 /*String Program::resources_path()
