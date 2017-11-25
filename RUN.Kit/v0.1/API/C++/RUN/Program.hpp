@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Program_HPP__
@@ -31,9 +31,7 @@ namespace RUN {class RUN_API Program {
 	//------------------------------------------------
 	int argc;
 
-	//-----------------------------------------------
 	/// The array of arguments passed to the program.
-	//-----------------------------------------------
 	char** argv;
 
 	//------------------------------------------------------------

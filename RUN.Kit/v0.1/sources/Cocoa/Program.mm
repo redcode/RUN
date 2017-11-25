@@ -203,6 +203,7 @@ Program::~Program()
 	NSApp.delegate = nil;
 	[APPLICATION_DELEGATE release];
 	[pool drain];
+	singleton = NULL;
 	}
 
 
