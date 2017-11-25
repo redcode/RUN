@@ -144,8 +144,9 @@ Program::~Program()
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
 			 (IMP)NSString_rangeOfString_options_range_locale);
 #	endif
-	}
 
+	singleton = NULL;
+	}
 
 void Program::run()
 	{
