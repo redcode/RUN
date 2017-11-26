@@ -119,33 +119,42 @@ static NSAutoreleasePool *pool;
 
 #ifdef RUN_USE_IOS_KEYBOARD
 
-#	include <Z/hardware/BUS/USB.h>
-#	include <Z/formats/keymap/Z.h>
+	//------------------------------------------------------------------.
+	// Selectors belonging to private APIs. Their names are ciphered    |
+	// at compile-time to prevent Apple from rejecting the application. |
+	//------------------------------------------------------------------'
 #	include "ObjCSecret.hpp"
-#	include "Selector.hpp"
 
 	static const auto $$handleKeyUIEvent = OBJC_SECRET(handleKeyUIEvent:);
 	static const auto $$firstResponder   = OBJC_SECRET(firstResponder   );
 	static const auto $$_keyCode	     = OBJC_SECRET(_keyCode	    );
 	static const auto $$_isKeyDown       = OBJC_SECRET(_isKeyDown	    );
 
+	//-----------------------------------------------------------------------.
+	// At run-time the selectors are deciphered and transformed to functors. |
+	//-----------------------------------------------------------------------'
+#	include "Selector.hpp"
+
 	static Selector<id()	> $firstResponder  ($$firstResponder  );
 	static Selector<void(id)> $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<long()  > $_keyCode	   ($$_keyCode	      );
 	static Selector<BOOL()  > $_isKeyDown	   ($$_isKeyDown      );
 
-	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
+	//----------------------------------------------------------------.
+	// In the absence of more detailed research, the iOS keyboard map |
+	// appears to be the one specified in the USB standard.		  |
+	//----------------------------------------------------------------'
+#	include <Z/hardware/BUS/USB.h>
+#	include <Z/formats/keymap/Z.h>
 
-	@class _RUNView;
-	static Class _RUNView_class;
-	static Class UIApplication_class;
+	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
 
 
 	static void _RUNApplication_handleKeyUIEvent(_RUNApplication *self, SEL _cmd, id event)
 		{
 		_RUNView *first_responder = $firstResponder(self.keyWindow);
 		
-		if (first_responder && [first_responder isKindOfClass: _RUNView_class])
+		if (first_responder && [first_responder isKindOfClass: _RUNView.class])
 			{
 			long key_code = $_keyCode(event);
 
@@ -160,7 +169,7 @@ static NSAutoreleasePool *pool;
 			}
 
 		else	{
-			struct objc_super super {self, UIApplication_class};
+			struct objc_super super {self, UIApplication.class};
 			$handleKeyUIEvent.super(&super, event);
 			}
 		}
@@ -190,11 +199,6 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 		NSString_original_rangeOfString_options_range_locale = class_replace_method
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
 			 (IMP)NSString_rangeOfString_options_range_locale);
-#	endif
-
-#	ifdef RUN_USE_IOS_KEYBOARD
-		_RUNView_class	    = _RUNView.class;
-		UIApplication_class = UIApplication.class;
 #	endif
 
 	singleton = this;
