@@ -130,12 +130,12 @@ static NSAutoreleasePool *pool;
 	static const auto $$_keyCode	     = OBJC_SECRET(_keyCode	    );
 	static const auto $$_isKeyDown       = OBJC_SECRET(_isKeyDown	    );
 
-	//-----------------------------------------------------------------------.
-	// At run-time the selectors are deciphered and transformed to functors. |
-	//-----------------------------------------------------------------------'
+	//----------------------------------------------------------------------.
+	// Once in run-time, they are deciphered and transformed into functors. |
+	//----------------------------------------------------------------------'
 #	include "Selector.hpp"
 
-	static Selector<id()	> $firstResponder  ($$firstResponder  );
+	static Selector<id  ()	> $firstResponder  ($$firstResponder  );
 	static Selector<void(id)> $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<long()  > $_keyCode	   ($$_keyCode	      );
 	static Selector<BOOL()  > $_isKeyDown	   ($$_isKeyDown      );
