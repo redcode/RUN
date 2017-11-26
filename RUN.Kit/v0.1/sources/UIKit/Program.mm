@@ -208,9 +208,9 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 Program::~Program()
 	{
 #	ifdef RUN_USE_IOS_BUG_WORKAROUNDS
-		NSString_original_rangeOfString_options_range_locale = class_replace_method
+		class_replace_method
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
-			 (IMP)NSString_rangeOfString_options_range_locale);
+			 (IMP)NSString_original_rangeOfString_options_range_locale);
 #	endif
 
 	[pool drain];
