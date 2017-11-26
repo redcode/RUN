@@ -120,7 +120,7 @@ static NSAutoreleasePool *pool;
 #ifdef RUN_USE_IOS_KEYBOARD
 
 	//------------------------------------------------------------------.
-	// Selectors belonging to private APIs. Their names are ciphered    |
+	// Selectors belonging to private APIs. Their names are enciphered  |
 	// at compile-time to prevent Apple from rejecting the application. |
 	//------------------------------------------------------------------'
 #	include "ObjCSecret.hpp"
@@ -135,8 +135,8 @@ static NSAutoreleasePool *pool;
 	//----------------------------------------------------------------------'
 #	include "Selector.hpp"
 
-	static Selector<id  ()	> $firstResponder  ($$firstResponder  );
 	static Selector<void(id)> $handleKeyUIEvent($$handleKeyUIEvent);
+	static Selector<id  ()	> $firstResponder  ($$firstResponder  );
 	static Selector<long()  > $_keyCode	   ($$_keyCode	      );
 	static Selector<BOOL()  > $_isKeyDown	   ($$_isKeyDown      );
 
@@ -147,7 +147,7 @@ static NSAutoreleasePool *pool;
 #	include <Z/hardware/BUS/USB.h>
 #	include <Z/formats/keymap/Z.h>
 
-	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
+	static Keyboard::Key const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
 
 
 	static void _RUNApplication_handleKeyUIEvent(_RUNApplication *self, SEL _cmd, id event)

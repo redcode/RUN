@@ -148,14 +148,15 @@ struct RUN_API RUN::Keyboard {
 
 		UInt8 scancode;
 
-		Z_INLINE_MEMBER Key(UInt8 scancode) : scancode(scancode) {}
-		Z_INLINE_MEMBER operator UInt8() const {return scancode;}
+		Z_INLINE_MEMBER Key() {}
 
-		Z_INLINE_MEMBER Boolean is_valid() const
+		Z_CT_MEMBER(CPP11) Key(UInt8 scancode) : scancode(scancode) {}
+		Z_CT_MEMBER(CPP11) operator UInt8() const {return scancode;}
+
+		Z_CT_MEMBER(CPP11) Boolean is_valid() const
 			{return scancode != Invalid;}
 
 		const Character *name() const;
-
 	};
 
 	UInt8 state[16];
