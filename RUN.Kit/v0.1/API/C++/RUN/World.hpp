@@ -34,7 +34,9 @@ class RUN_API RUN::World {
 	Scene*		  scene;
 	Color<Float>	  background_color;
 
-	/*! The desired number of frames per second the world must execute. */
+	//-----------------------------------------------------------------
+	/// The desired number of frames per second the world must execute.
+	//-----------------------------------------------------------------
 	Natural volatile fps;
 
 	protected:

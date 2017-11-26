@@ -176,17 +176,17 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	pool = [[NSAutoreleasePool alloc] init];
 
 #	ifdef RUN_USE_IOS_BUG_WORKAROUNDS
-		//-------------------------------------------------------------------------.
-		// There is a bug in some versions of iOS that causes the program to crash |
-		// when using bluetooth keyboards and certain key combinations are used.   |
-		// This affects to any app (but some Apple ones seem to be unaffected).    |
-		// A NSInvalidArgumentException is triggered with the following reason:    |
-		//									   |
-		// '*** -[__NSCFString rangeOfString:options:range:locale:]: nil argument' |
-		//									   |
-		// To fix this, we replace the original method that triggers the exception |
-		// with a more permissive one.						   |
-		//-------------------------------------------------------------------------'
+		//--------------------------------------------------------------------------.
+		// There is a bug in some versions of iOS that causes the program to crash  |
+		// when using bluetooth keyboards and certain key combinations are pressed. |
+		// This affects to any app (but some Apple ones seem to be unaffected).     |
+		// A NSInvalidArgumentException is triggered with the following reason:     |
+		//									    |
+		// '*** -[__NSCFString rangeOfString:options:range:locale:]: nil argument'  |
+		//									    |
+		// To fix this, we replace the original method that triggers the exception  |
+		// with a more permissive one.						    |
+		//--------------------------------------------------------------------------'
 		NSString_original_rangeOfString_options_range_locale = class_replace_method
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
 			 (IMP)NSString_rangeOfString_options_range_locale);
