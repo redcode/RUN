@@ -74,7 +74,7 @@ template <class F, class... P> struct SelectorFunctor<F, Zeta::TypeList<P...> > 
 	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		((SuperCaller)super_caller)(object_super, ((This)this)->selector, parameters...);
+		((SuperCaller)super_caller)(&object_super, ((This)this)->selector, parameters...);
 		}
 
 
@@ -83,20 +83,20 @@ template <class F, class... P> struct SelectorFunctor<F, Zeta::TypeList<P...> > 
 	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		return ((SuperCaller)super_caller)(object_super, ((This)this)->selector, parameters...);
+		return ((SuperCaller)super_caller)(&object_super, ((This)this)->selector, parameters...);
 		}
 
 
 	template <class R = Returned>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<Zeta::Type<R>::is_void, void>::type
-	super(struct objc_super *object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{((SuperCaller)super_caller)(object_super, ((This)this)->selector, parameters...);}
+	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
+		{((SuperCaller)super_caller)((struct objc_super *)&object_super, ((This)this)->selector, parameters...);}
 
 
 	template <class R = Returned>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<!Zeta::Type<R>::is_void, R>::type
-	super(struct objc_super *object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{return ((SuperCaller)super_caller)(object_super, ((This)this)->selector, parameters...);}
+	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
+		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, ((This)this)->selector, parameters...);}
 };
 
 

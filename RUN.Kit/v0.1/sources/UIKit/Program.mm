@@ -5,8 +5,6 @@
 Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#define Z_USE_GC_GEOMETRY
-
 #import <RUN/Program.hpp>
 #import "_RUNView.h"
 #import <objc/objc.h>
@@ -129,16 +127,20 @@ static NSAutoreleasePool *pool;
 	static const auto $$firstResponder   = OBJC_SECRET(firstResponder   );
 	static const auto $$_keyCode	     = OBJC_SECRET(_keyCode	    );
 	static const auto $$_isKeyDown       = OBJC_SECRET(_isKeyDown	    );
+	static const auto $$sendEvent	     = OBJC_SECRET(sendEvent:	    );
+	static const auto $$_gsEvent	     = OBJC_SECRET(_gsEvent	    );
 
 	//----------------------------------------------------------------------.
 	// Once in run-time, they are deciphered and transformed into functors. |
 	//----------------------------------------------------------------------'
 #	include "Selector.hpp"
 
-	static Selector<void(id)> $handleKeyUIEvent($$handleKeyUIEvent);
-	static Selector<id  ()	> $firstResponder  ($$firstResponder  );
-	static Selector<long()  > $_keyCode	   ($$_keyCode	      );
-	static Selector<BOOL()  > $_isKeyDown	   ($$_isKeyDown      );
+	static Selector<void(id)       > $handleKeyUIEvent($$handleKeyUIEvent);
+	static Selector<id()	       > $firstResponder  ($$firstResponder  );
+	static Selector<long()	       > $_keyCode	  ($$_keyCode	     );
+	static Selector<BOOL()	       > $_isKeyDown	  ($$_isKeyDown      );
+	static Selector<void(UIEvent *)> $sendEvent	  ($$sendEvent	     );
+	static Selector<Long *()       > $_gsEvent	  ($$_gsEvent	     );
 
 	//----------------------------------------------------------------.
 	// In the absence of more detailed research, the iOS keyboard map |
@@ -150,6 +152,9 @@ static NSAutoreleasePool *pool;
 	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
 
 
+	//-------------------------------.
+	// iOS >= v7.0 keyboard handler. |
+	//-------------------------------'
 	static void _RUNApplication_handleKeyUIEvent(_RUNApplication *self, SEL _cmd, id event)
 		{
 		_RUNView *first_responder = $firstResponder(self.keyWindow);
@@ -168,9 +173,58 @@ static NSAutoreleasePool *pool;
 				}
 			}
 
-		else	{
-			struct objc_super super {self, UIApplication.class};
-			$handleKeyUIEvent.super(&super, event);
+		else $handleKeyUIEvent.super({self, UIApplication.class}, event);
+		}
+
+
+	//------------------------------.
+	// iOS < v7.0 keyboard handler. |
+	//------------------------------'
+#	define GS_EVENT_OFFSET_TYPE 2
+
+#	if Z_LONG_SIZE == 4
+#		define GS_EVENT_OFFSET_KEY_CODE 15
+#	elif Z_LONG_SIZE == 8
+#		define GS_EVENT_OFFSET_KEY_CODE 13
+#	endif
+
+#	define GS_EVENT_FLAGS			   12
+#	define GS_EVENT_TYPE_KEY_DOWN		   10
+#	define GS_EVENT_TYPE_KEY_UP		   11
+#	define GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED 12
+
+	static void _RUNApplication_sendEvent(_RUNApplication *self, SEL _cmd, UIEvent *event)
+		{
+		$sendEvent.super({self, UIApplication.class}, event);
+
+		Long *event_memory;
+		_RUNView *first_responder;
+
+		if (	[event respondsToSelector: $_gsEvent]		    &&
+			(event_memory = $_gsEvent(event))		    &&
+			(first_responder = $firstResponder(self.keyWindow)) &&
+			[first_responder isKindOfClass: _RUNView.class]
+		)
+			{
+			UniChar key_code;
+
+			switch (event_memory[GS_EVENT_OFFSET_TYPE])
+				{
+				case GS_EVENT_TYPE_KEY_DOWN:
+				if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
+					first_responder->world->key_down(keymap[key_code]);
+				break;
+
+				case GS_EVENT_TYPE_KEY_UP:
+				if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
+					first_responder->world->key_up(keymap[key_code]);
+				break;
+
+				case GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED:
+				// TODO
+
+				default: break;
+				}
 			}
 		}
 
@@ -199,6 +253,23 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 		NSString_original_rangeOfString_options_range_locale = class_replace_method
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
 			 (IMP)NSString_rangeOfString_options_range_locale);
+#	endif
+
+#	ifdef RUN_USE_IOS_KEYBOARD
+		//--------------------------------------------------------------------.
+		// In order to avoid the detection of private APIs usage, we override |
+		// the method where we capture the keyboard events at run-time.	      |
+		//--------------------------------------------------------------------'
+		Class UIApplicaation_class = UIApplication.class, _RUNApplication_class = _RUNApplication.class;
+		Method handleKeyUIEvent = class_getInstanceMethod(UIApplicaation_class, $handleKeyUIEvent);
+
+		if (handleKeyUIEvent) class_addMethod
+			(_RUNApplication_class, $handleKeyUIEvent, (IMP)_RUNApplication_handleKeyUIEvent,
+			 method_getDescription(handleKeyUIEvent)->types);
+
+		else class_addMethod
+			(_RUNApplication_class, $handleKeyUIEvent, (IMP)_RUNApplication_sendEvent,
+			 method_getDescription(class_getInstanceMethod(UIApplicaation_class, $sendEvent))->types);
 #	endif
 
 	singleton = this;
