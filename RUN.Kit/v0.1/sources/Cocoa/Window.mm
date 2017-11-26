@@ -43,7 +43,7 @@ static NSScreen *suitable_screen_for_size(NSScreen *current_screen, const Value2
 	{
 	Rectangle<Real> screen_frame = current_screen.visibleFrame;
 
-	if (!screen_frame.size.contains(size)) for (NSScreen *screen in NSScreen.screens)
+	if (screen_frame.size < size) for (NSScreen *screen in NSScreen.screens)
 		if (size <= screen.visibleFrame.size) return screen;
 
 	return current_screen;
@@ -54,7 +54,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	{
 	native_context = [[_RUNNativeWindow alloc]
 		initWithContentRect: size
-		styleMask:	     (mode & Mode::RESIZABLE) ? WINDOW_STYLE | NSResizableWindowMask : WINDOW_STYLE
+		styleMask:	     (mode & RESIZABLE) ? WINDOW_STYLE | NSResizableWindowMask : WINDOW_STYLE
 		backing:	     NSBackingStoreBuffered
 		defer:		     NO];
 
@@ -66,7 +66,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	Value2D<Real> window_size = WINDOW.frame.size;
 	Rectangle<Real> screen_frame = suitable_screen_for_size(NSScreen.mainScreen, window_size).visibleFrame;
 
-	if (!screen_frame.size.contains(window_size))
+	if (screen_frame.size < window_size)
 		{
 		auto window_border = window_size - ((NSView *)WINDOW.contentView).bounds.size;
 
@@ -91,7 +91,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	WINDOW.contentView = view;
 	[WINDOW makeFirstResponder: view];
 	//[WINDOW.contentView addSubview: system_view];
-	if (mode & Mode::PRESERVE_ASPECT_RATIO) WINDOW.contentAspectRatio = size;
+	if (mode & PRESERVE_ASPECT_RATIO) WINDOW.contentAspectRatio = size;
 	WINDOW.delegate = WINDOW;
 	[WINDOW makeKeyAndOrderFront: nil];
 	}
@@ -116,7 +116,7 @@ void Window::set_content_size(const Value2D<Real> &size)
 	auto window_top_center = window_frame.top_center();
 	auto window_border = window_frame.size - ((NSView *)WINDOW.contentView).bounds.size;
 
-	if (!screen_frame.size.contains(window_border + size))
+	if (screen_frame.size < (window_border + size))
 		{
 		window_frame.size = window_border + size.fit(screen_frame.size - window_border);
 		if (window_frame.size.y == screen_frame.size.y) window_frame.size.x = floor(window_frame.size.x);

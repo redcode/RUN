@@ -84,13 +84,13 @@ void World::pop_scene(Natural scene_index, const Scene::Transition &transition)
 
 #if RUN_TARGET_HAS_KEYBOARD
 
-	void World::keyboard_down(Keyboard::Key key)
+	void World::key_down(Keyboard::Key key)
 		{
 		keyboard += key;
 		}
 
 
-	void World::keyboard_up(Keyboard::Key key)
+	void World::key_up(Keyboard::Key key)
 		{
 		keyboard -= key;
 		}

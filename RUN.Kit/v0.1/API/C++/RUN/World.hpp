@@ -79,13 +79,13 @@ class RUN_API RUN::World {
 		/// Called when a key of the keyboard is pressed.
 		/// @param key The key that has been pressed.
 		//-----------------------------------------------
-		void keyboard_down(Keyboard::Key key);
+		void key_down(Keyboard::Key key);
 
 		//------------------------------------------------
 		/// Called when a key of the keyboard is released.
 		/// @param key The key that has been released.
 		//------------------------------------------------
-		void keyboard_up(Keyboard::Key key);
+		void key_up(Keyboard::Key key);
 #	endif
 
 #	if RUN_TARGET_HAS_MOUSE
@@ -148,7 +148,7 @@ class RUN_API RUN::World {
 		//Array<Touch> _touches;
 
 		public:
-		void touches_down ();
+		void touches_down();
 		void touches_up();
 		void touches_moved();
 		void touches_cancelled();

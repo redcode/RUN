@@ -7,8 +7,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_CG_GEOMETRY
 
-#import <RUN/World.hpp>
-#import <UIKit/UIKit.h>
+#import "_RUNView.h"
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
@@ -17,14 +16,10 @@ Released under the terms of the GNU Lesser General Public License v3. */
 using namespace RUN;
 
 
-@interface _RUNView : UIView {
-	@public
-	World* world;
-}
-@end
-
-
 @implementation _RUNView
+
+
+	- (BOOL) canBecomeFirstResponder {return YES;}
 
 
 	- (void) touchesBegan: (NSSet	*) touches

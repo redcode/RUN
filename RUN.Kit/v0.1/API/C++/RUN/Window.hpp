@@ -11,7 +11,6 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/namespace.hpp>
 #include <RUN/World.hpp>
 #include <Z/classes/base/Value2D.hpp>
-#include <Z/macros/enumeration.hpp>
 
 class RUN_API RUN::Window {
 	protected:
@@ -19,11 +18,12 @@ class RUN_API RUN::Window {
 
 	public:
 
-	Z_ENUMERATION_BEGIN(Mode)
-		RESIZABLE	      = 1,
+	typedef UInt8 Mode;
+
+	enum {	RESIZABLE	      = 1,
 		PRESERVE_ASPECT_RATIO = 2,
 		FULL_SCREEN	      = 4
-	Z_ENUMERATION_END
+	};
 
 	World *world;
 
@@ -48,6 +48,5 @@ class RUN_API RUN::Window {
 	Boolean is_visible();
 
 };
-
 
 #endif // __RUN_Window_HPP__

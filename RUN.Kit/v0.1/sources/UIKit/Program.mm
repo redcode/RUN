@@ -8,7 +8,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #define Z_USE_GC_GEOMETRY
 
 #import <RUN/Program.hpp>
-#import <UIKit/UIKit.h>
+#import "_RUNView.h"
 #import <objc/objc.h>
 #import <objc/message.h>
 
@@ -49,8 +49,8 @@ static NSAutoreleasePool *pool;
 		}
 
 
-	- (BOOL) application:			(_RUNApplication) application
-		 didFinishLaunchingWithOptions: (NSDictionary  *) options
+	- (BOOL) application:			(_RUNApplication *) application
+		 didFinishLaunchingWithOptions: (NSDictionary	 *) options
 		{
 		Program::singleton->did_start();
 		return YES;
@@ -117,9 +117,64 @@ static NSAutoreleasePool *pool;
 #endif
 
 
+#ifdef RUN_USE_IOS_KEYBOARD
+
+#	include <Z/hardware/BUS/USB.h>
+#	include <Z/formats/keymap/Z.h>
+#	include "ObjCSecret.hpp"
+#	include "Selector.hpp"
+
+	static const auto $$handleKeyUIEvent = OBJC_SECRET(handleKeyUIEvent:);
+	static const auto $$firstResponder   = OBJC_SECRET(firstResponder   );
+	static const auto $$_keyCode	     = OBJC_SECRET(_keyCode	    );
+	static const auto $$_isKeyDown       = OBJC_SECRET(_isKeyDown	    );
+
+	static Selector<id()	> $firstResponder  ($$firstResponder  );
+	static Selector<void(id)> $handleKeyUIEvent($$handleKeyUIEvent);
+	static Selector<long()  > $_keyCode	   ($$_keyCode	      );
+	static Selector<BOOL()  > $_isKeyDown	   ($$_isKeyDown      );
+
+	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
+
+	@class _RUNView;
+	static Class _RUNView_class;
+	static Class UIApplication_class;
+
+
+	static void _RUNApplication_handleKeyUIEvent(_RUNApplication *self, SEL _cmd, id event)
+		{
+		_RUNView *first_responder = $firstResponder(self.keyWindow);
+		
+		if (first_responder && [first_responder isKindOfClass: _RUNView_class])
+			{
+			long key_code = $_keyCode(event);
+
+			if (key_code < 0xE8)
+				{
+				if (((BOOL (*)(id, SEL))objc_msgSend)(event, $_isKeyDown))
+				/*if ($_isKeyDown(event))*/
+					first_responder->world->key_down(keymap[key_code]);
+
+				else first_responder->world->key_up(keymap[key_code]);
+				}
+			}
+
+		else	{
+			struct objc_super super {self, UIApplication_class};
+			$handleKeyUIEvent.super(&super, event);
+			}
+		}
+
+#endif
+
 
 Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	{
+	//-------------------------------------.
+	// Create the global autorelease pool. |
+	//-------------------------------------'
+	pool = [[NSAutoreleasePool alloc] init];
+
 #	ifdef RUN_USE_IOS_BUG_WORKAROUNDS
 		//-------------------------------------------------------------------------.
 		// There is a bug in some versions of iOS that causes the program to crash |
@@ -137,30 +192,35 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 			 (IMP)NSString_rangeOfString_options_range_locale);
 #	endif
 
-	//-------------------------------------.
-	// Create the global autorelease pool. |
-	//-------------------------------------'
-	pool = [[NSAutoreleasePool alloc] init];
+#	ifdef RUN_USE_IOS_KEYBOARD
+		_RUNView_class	    = _RUNView.class;
+		UIApplication_class = UIApplication.class;
+#	endif
+
 	singleton = this;
 	}
 
 
 Program::~Program()
 	{
-	[pool drain];
-
 #	ifdef RUN_USE_IOS_BUG_WORKAROUNDS
 		NSString_original_rangeOfString_options_range_locale = class_replace_method
 			(NSString.class, @selector(rangeOfString:options:range:locale:),
 			 (IMP)NSString_rangeOfString_options_range_locale);
 #	endif
 
+	[pool drain];
 	singleton = NULL;
 	}
 
 
 void Program::run()
 	{UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");}
+
+
+void Program::exit()
+	{
+	}
 
 
 /*String Program::resources_path()

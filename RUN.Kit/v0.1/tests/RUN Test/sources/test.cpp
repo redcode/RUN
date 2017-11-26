@@ -26,7 +26,7 @@ class Test : public Program {
 
 void Test::will_start()
 	{
-	Window *window = new Window(Value2D<Real>(320.0, 240.0), Window::Mode::RESIZABLE | Window::Mode::PRESERVE_ASPECT_RATIO);
+	Window *window = new Window(Value2D<Real>(320.0, 240.0), Window::RESIZABLE | Window::PRESERVE_ASPECT_RATIO);
 	std::cout << "will_start()\n";
 
 	//window->set_content_aspect_ratio(Value2D<Real>(320.0, 240.0));
