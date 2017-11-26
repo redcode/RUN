@@ -22,10 +22,6 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 using namespace RUN;
 
-#define _(key) Keyboard::Key::key
-
-static UInt8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE};
-
 
 @interface _RUNView : NSView {
 	@public
@@ -93,13 +89,16 @@ static UInt8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE}
 #	undef EVENT_POINT
 
 
+	static zuint8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE};
+
+
 	- (void) keyDown: (NSEvent *) event
 		{
 		if (!event.isARepeat)
 			{
 			Keyboard::Key key(keymap[event.keyCode & 0x7F]);
 
-			if (key.is_valid()) world->keyboard_down(key);
+			if (key.is_valid()) world->key_down(key);
 			}
 		}
 
@@ -110,7 +109,7 @@ static UInt8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE}
 			{
 			Keyboard::Key key(keymap[event.keyCode & 0x7F]);
 
-			if (key.is_valid()) world->keyboard_up(key);
+			if (key.is_valid()) world->key_up(key);
 			}
 		}
 
@@ -120,36 +119,22 @@ static UInt8 const keymap[128] = {Z_ARRAY_CONTENT_MAC_OS_KEY_CODE_TO_Z_KEY_CODE}
 		UInt32 keys = UInt32(event.modifierFlags);
 		UInt32 changed = _modifier_keys ^ keys;
 
-		enum {	CapsLock     = 0x010000,
-			/*Shift	     = 0x020000,
-			Control	     = 0x040000,
-			Option	     = 0x080000,
-			Command	     = 0x100000,*/
-			LeftShift    = 0x000002,
-			RightShift   = 0x000004,
-			LeftControl  = 0x000001,
-			RightControl = 0x002000,
-			LeftOption   = 0x000020,
-			RightOption  = 0x000040,
-			LeftCommand  = 0x000008,
-			RightCommand = 0x000010
-		};
+#		define HANDLE_KEY(mask, key)								  \
+			if (changed & Z_MAC_OS_KEY_MASK_##mask)						  \
+				{									  \
+				if (keys & Z_MAC_OS_KEY_MASK_##mask) world->key_down(Keyboard::Key::key); \
+				else world->key_up(Keyboard::Key::key);					  \
+				}
 
-#		define HANDLE_KEY(key) if (changed & key)			  \
-			{							  \
-			if (keys & key) world->keyboard_down(Keyboard::Key::key); \
-			else		world->keyboard_up  (Keyboard::Key::key); \
-			}
-
-		HANDLE_KEY(CapsLock    )
-		HANDLE_KEY(LeftShift   )
-		HANDLE_KEY(LeftControl )
-		HANDLE_KEY(LeftOption  )
-		HANDLE_KEY(LeftCommand )
-		HANDLE_KEY(RightShift  )
-		HANDLE_KEY(RightControl)
-		HANDLE_KEY(RightOption )
-		HANDLE_KEY(RightCommand)
+		HANDLE_KEY(CAPS_LOCK,	  CapsLock    )
+		HANDLE_KEY(LEFT_SHIFT,	  LeftShift   )
+		HANDLE_KEY(LEFT_CONTROL,  LeftControl )
+		HANDLE_KEY(LEFT_OPTION,	  LeftOption  )
+		HANDLE_KEY(LEFT_COMMAND,  LeftCommand )
+		HANDLE_KEY(RIGHT_SHIFT,	  RightShift  )
+		HANDLE_KEY(RIGHT_CONTROL, RightControl)
+		HANDLE_KEY(RIGHT_OPTION,  RightOption )
+		HANDLE_KEY(RIGHT_COMMAND, RightCommand)
 
 #		undef HANDLE_KEY
 

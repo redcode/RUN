@@ -147,7 +147,7 @@ static NSAutoreleasePool *pool;
 #	include <Z/hardware/BUS/USB.h>
 #	include <Z/formats/keymap/Z.h>
 
-	static Keyboard::Key const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
+	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
 
 
 	static void _RUNApplication_handleKeyUIEvent(_RUNApplication *self, SEL _cmd, id event)
