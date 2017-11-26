@@ -7,8 +7,6 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #import <RUN/Program.hpp>
 #import "_RUNView.h"
-#import <objc/objc.h>
-#import <objc/message.h>
 
 using namespace RUN;
 
@@ -67,6 +65,8 @@ static NSAutoreleasePool *pool;
 
 #ifdef RUN_USE_IOS_BUG_WORKAROUNDS
 
+#	import <objc/runtime.h>
+
 	static IMP NSString_original_rangeOfString_options_range_locale;
 
 
@@ -121,7 +121,7 @@ static NSAutoreleasePool *pool;
 	// Selectors belonging to private APIs. Their names are enciphered  |
 	// at compile-time to prevent Apple from rejecting the application. |
 	//------------------------------------------------------------------'
-#	include "ObjCSecret.hpp"
+#	import "ObjCSecret.hpp"
 
 	static const auto $$handleKeyUIEvent = OBJC_SECRET(handleKeyUIEvent:);
 	static const auto $$firstResponder   = OBJC_SECRET(firstResponder   );
@@ -133,7 +133,7 @@ static NSAutoreleasePool *pool;
 	//----------------------------------------------------------------------.
 	// Once in run-time, they are deciphered and transformed into functors. |
 	//----------------------------------------------------------------------'
-#	include "Selector.hpp"
+#	import "Selector.hpp"
 
 	static Selector<void(id)       > $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<id()	       > $firstResponder  ($$firstResponder  );
@@ -146,8 +146,8 @@ static NSAutoreleasePool *pool;
 	// In the absence of more detailed research, the iOS keyboard map |
 	// appears to be the one specified in the USB standard.		  |
 	//----------------------------------------------------------------'
-#	include <Z/hardware/BUS/USB.h>
-#	include <Z/formats/keymap/Z.h>
+#	import <Z/hardware/BUS/USB.h>
+#	import <Z/formats/keymap/Z.h>
 
 	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
 
