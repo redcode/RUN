@@ -258,7 +258,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 #	ifdef RUN_USE_IOS_KEYBOARD
 		//--------------------------------------------------------------------.
 		// In order to avoid the detection of private APIs usage, we override |
-		// the method where we capture the keyboard events at run-time.	      |
+		// the method where the keyboard events are captured at run-time.     |
 		//--------------------------------------------------------------------'
 		Class UIApplicaation_class = UIApplication.class, _RUNApplication_class = _RUNApplication.class;
 		Method handleKeyUIEvent = class_getInstanceMethod(UIApplicaation_class, $handleKeyUIEvent);
