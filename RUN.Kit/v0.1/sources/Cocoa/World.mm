@@ -47,22 +47,23 @@ using namespace RUN;
 	- (BOOL) isOpaque	       {return YES;}
 
 
-	- (void) setFrameSize: (Value2D<Real>) size
+	- (void) setFrameSize: (NSSize) size
 		{
 		super.frameSize = size;
-		world->size = size * _ppp;
+		world->size = Value2D<Real>(Real(size.width) * _ppp, Real(size.height) * _ppp);
 		world->update_geometry();
 		}
 
 
-	- (void) setFrame: (Rectangle<Real>) frame
+	- (void) setFrame: (NSRect) frame
 		{
-		Value2D<Real> old_size = self.frame.size;
+		Value2D<Real> size(Real(frame.size.width) * _ppp, Real(frame.size.height) * _ppp);
+
 		super.frame = frame;
 
-		if (old_size != (frame.size *= _ppp))
+		if (world->size != size)
 			{
-			world->size = frame.size;
+			world->size = size;
 			world->update_geometry();
 			}
 		}
