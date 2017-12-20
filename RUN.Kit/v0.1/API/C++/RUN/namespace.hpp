@@ -22,6 +22,7 @@ namespace RUN {
 	using String = std::string;
 	template <class T> using Function = ::std::function<T>;
 	template <class T> using Array	  = ::std::vector<T>;
+
 	using namespace Zeta;
 
 	template <class T> struct Matrix4x4 {

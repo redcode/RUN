@@ -21,7 +21,8 @@ class RUN_API RUN::Texture {
 	struct Frame {
 		Rectangle<Real>  rectangle;
 		Real		 rotation;
-		Value2D<Boolean> flipped;
+		Boolean		 flipped_x;
+		Boolean		 flipped_y;
 	};
 
 	Format	      format;

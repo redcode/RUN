@@ -165,8 +165,7 @@ static NSAutoreleasePool *pool;
 
 			if (key_code < 0xE8)
 				{
-				if (((BOOL (*)(id, SEL))objc_msgSend)(event, $_isKeyDown))
-				/*if ($_isKeyDown(event))*/
+				if ($_isKeyDown(event))
 					first_responder->world->key_down(keymap[key_code]);
 
 				else first_responder->world->key_up(keymap[key_code]);

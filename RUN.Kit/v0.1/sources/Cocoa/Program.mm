@@ -12,6 +12,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #define APPLICATION_DELEGATE ((_RUNApplicationDelegate *)_native_context)
 
 using namespace RUN;
+using Boolean = Zeta::Boolean;
 
 static NSAutoreleasePool* pool;
 
