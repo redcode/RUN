@@ -303,7 +303,7 @@ void Program::exit()
 */
 
 
-Boolean Program::open_url(const String &url)
+Zeta::Boolean Program::open_url(const String &url)
 	{
 	auto application = UIApplication.sharedApplication;
 	auto u = [NSURL URLWithString: @(url.c_str())];

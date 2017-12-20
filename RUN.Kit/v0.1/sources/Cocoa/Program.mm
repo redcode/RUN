@@ -6,13 +6,12 @@ Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #include <RUN/Program.hpp>
-#include <Cocoa/Cocoa.h>
 #include <RUN/Window.hpp>
+#include <Cocoa/Cocoa.h>
 
 #define APPLICATION_DELEGATE ((_RUNApplicationDelegate *)_native_context)
 
 using namespace RUN;
-using Boolean = Zeta::Boolean;
 
 static NSAutoreleasePool* pool;
 
@@ -253,7 +252,7 @@ void Program::exit()
 	}
 
 
-Boolean Program::open_url(const String &url)
+Zeta::Boolean Program::open_url(const String &url)
 	{return [NSWorkspace.sharedWorkspace openURL: [NSURL URLWithString: @(url.c_str())]];}
 
 

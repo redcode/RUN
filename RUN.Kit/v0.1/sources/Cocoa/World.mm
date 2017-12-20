@@ -6,17 +6,16 @@ Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
-
 #import <RUN/World.hpp>
-#import <Cocoa/Cocoa.h>
-#import <QuartzCore/QuartzCore.h>
-#import <OpenGL/gl.h>
-#import <OpenGL/OpenGL.h>
 #import <Z/types/base.h>
 #import <Z/classes/base/Status.hpp>
 #import <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 #import <Z/formats/keymap/Mac OS.h>
 #import <Z/formats/keymap/Z.h>
+#import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
+#import <OpenGL/gl.h>
+#import <OpenGL/OpenGL.h>
 
 #define VIEW ((_RUNGLView *)native_context)
 

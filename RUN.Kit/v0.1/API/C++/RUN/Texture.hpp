@@ -10,7 +10,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #include <RUN/namespace.hpp>
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
-#include <tuple>
+
 
 class RUN_API RUN::Texture {
 	public:

@@ -6,11 +6,10 @@ Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
-
 #include <RUN/Window.hpp>
 #include <RUN/Program.hpp>
-#include <Cocoa/Cocoa.h>
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
+#include <Cocoa/Cocoa.h>
 
 #define WINDOW	     ((_RUNNativeWindow *)native_context)
 #define WINDOW_STYLE NSClosableWindowMask | NSMiniaturizableWindowMask | NSTitledWindowMask
@@ -151,19 +150,19 @@ void Window::set_title(const String &title)
 	{WINDOW.title = @(title.c_str());}
 
 
-Boolean Window::full_screen() const
+Zeta::Boolean Window::full_screen() const
 	{return ((WINDOW.styleMask & NSFullScreenWindowMask) == NSFullScreenWindowMask);}
 
 
-void Window::set_full_screen(Boolean value)
+void Window::set_full_screen(Zeta::Boolean value)
 	{
 	}
 
 
-Boolean Window::is_focused  () {return WINDOW.isKeyWindow;}
-Boolean Window::is_maximized() {return WINDOW.isZoomed;}
-Boolean Window::is_minimized() {return WINDOW.isMiniaturized;}
-Boolean Window::is_visible  () {return WINDOW.isVisible;}
+Zeta::Boolean Window::is_focused  () {return WINDOW.isKeyWindow;}
+Zeta::Boolean Window::is_maximized() {return WINDOW.isZoomed;}
+Zeta::Boolean Window::is_minimized() {return WINDOW.isMiniaturized;}
+Zeta::Boolean Window::is_visible  () {return WINDOW.isVisible;}
 
 
 // Cocoa/Window.mm EOF
