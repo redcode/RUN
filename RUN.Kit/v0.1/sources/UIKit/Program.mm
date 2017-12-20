@@ -26,16 +26,6 @@ static NSAutoreleasePool *pool;
 @implementation _RUNApplicationDelegate
 
 
-	- (id) init
-		{
-		if ((self = [super init]))
-			{
-			}
-
-		return self;
-		}
-
-
 	- (BOOL) application:			 (_RUNApplication *) application
 		 willFinishLaunchingWithOptions: (NSDictionary	  *) optiona
 		{
