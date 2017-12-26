@@ -7,6 +7,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #import <RUN/Program.hpp>
 #import "_RUNView.h"
+#import <Availability.h>
 
 using namespace RUN;
 
@@ -127,7 +128,7 @@ static NSAutoreleasePool *pool;
 
 	static Selector<void(id)       > $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<id()	       > $firstResponder  ($$firstResponder  );
-	static Selector<long()	       > $_keyCode	  ($$_keyCode	     );
+	static Selector<Long()	       > $_keyCode	  ($$_keyCode	     );
 	static Selector<BOOL()	       > $_isKeyDown	  ($$_isKeyDown      );
 	static Selector<void(UIEvent *)> $sendEvent	  ($$sendEvent	     );
 	static Selector<Long *()       > $_gsEvent	  ($$_gsEvent	     );
@@ -166,59 +167,62 @@ static NSAutoreleasePool *pool;
 		}
 
 
-	//------------------------------.
-	// iOS < v7.0 keyboard handler. |
-	//------------------------------'
-#	define GS_EVENT_OFFSET_TYPE 2
+#	if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
 
-#	if Z_LONG_SIZE == 4
-#		define GS_EVENT_OFFSET_KEY_CODE 15
-#	elif Z_LONG_SIZE == 8
-#		define GS_EVENT_OFFSET_KEY_CODE 13
-#	endif
+		//------------------------------.
+		// iOS < v7.0 keyboard handler. |
+		//------------------------------'
+#		define GS_EVENT_OFFSET_TYPE 2
 
-#	define GS_EVENT_FLAGS			   12
-#	define GS_EVENT_TYPE_KEY_DOWN		   10
-#	define GS_EVENT_TYPE_KEY_UP		   11
-#	define GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED 12
+#		if Z_LONG_SIZE == 4
+#			define GS_EVENT_OFFSET_KEY_CODE 15
+#		elif Z_LONG_SIZE == 8
+#			define GS_EVENT_OFFSET_KEY_CODE 13
+#		endif
 
-	static void _RUNApplication_sendEvent(_RUNApplication *self, SEL _cmd, UIEvent *event)
-		{
-		$sendEvent.super({self, UIApplication.class}, event);
+#		define GS_EVENT_FLAGS			   12
+#		define GS_EVENT_TYPE_KEY_DOWN		   10
+#		define GS_EVENT_TYPE_KEY_UP		   11
+#		define GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED 12
 
-		Long *event_memory;
-		_RUNView *first_responder;
-
-		if (	[event respondsToSelector: $_gsEvent]		    &&
-			(event_memory = $_gsEvent(event))		    &&
-			(first_responder = $firstResponder(self.keyWindow)) &&
-			[first_responder isKindOfClass: _RUNView.class]
-		)
+		static void _RUNApplication_sendEvent(_RUNApplication *self, SEL _cmd, UIEvent *event)
 			{
-			UniChar key_code;
+			$sendEvent.super({self, UIApplication.class}, event);
 
-			switch (event_memory[GS_EVENT_OFFSET_TYPE])
+			Long *event_memory;
+			_RUNView *first_responder;
+
+			if (	[event respondsToSelector: $_gsEvent]		    &&
+				(event_memory = $_gsEvent(event))		    &&
+				(first_responder = $firstResponder(self.keyWindow)) &&
+				[first_responder isKindOfClass: _RUNView.class]
+			)
 				{
-				case GS_EVENT_TYPE_KEY_DOWN:
-				if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
-					first_responder->world->key_down(keymap[key_code]);
-				break;
+				UniChar key_code;
 
-				case GS_EVENT_TYPE_KEY_UP:
-				if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
-					first_responder->world->key_up(keymap[key_code]);
-				break;
+				switch (event_memory[GS_EVENT_OFFSET_TYPE])
+					{
+					case GS_EVENT_TYPE_KEY_DOWN:
+					if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
+						first_responder->world->key_down(keymap[key_code]);
+					break;
 
-				case GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED:
-				// TODO
+					case GS_EVENT_TYPE_KEY_UP:
+					if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
+						first_responder->world->key_up(keymap[key_code]);
+					break;
 
-				default: break;
+					case GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED:
+					// TODO
+
+					default: break;
+					}
 				}
 			}
-		}
+
+#	endif
 
 #endif
-
 
 Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	{
@@ -256,9 +260,11 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 			(_RUNApplication_class, $handleKeyUIEvent, (IMP)_RUNApplication_handleKeyUIEvent,
 			 method_getDescription(handleKeyUIEvent)->types);
 
-		else class_addMethod
-			(_RUNApplication_class, $handleKeyUIEvent, (IMP)_RUNApplication_sendEvent,
-			 method_getDescription(class_getInstanceMethod(UIApplicaation_class, $sendEvent))->types);
+#		if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+			else class_addMethod
+				(_RUNApplication_class, $handleKeyUIEvent, (IMP)_RUNApplication_sendEvent,
+				 method_getDescription(class_getInstanceMethod(UIApplicaation_class, $sendEvent))->types);
+#		endif
 #	endif
 
 	singleton = this;
