@@ -128,10 +128,10 @@ static NSAutoreleasePool *pool;
 
 	static Selector<void(id)       > $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<id()	       > $firstResponder  ($$firstResponder  );
-	static Selector<Long()	       > $_keyCode	  ($$_keyCode	     );
+	static Selector<SLong()	       > $_keyCode	  ($$_keyCode	     );
 	static Selector<BOOL()	       > $_isKeyDown	  ($$_isKeyDown      );
 	static Selector<void(UIEvent *)> $sendEvent	  ($$sendEvent	     );
-	static Selector<Long *()       > $_gsEvent	  ($$_gsEvent	     );
+	static Selector<SLong *()      > $_gsEvent	  ($$_gsEvent	     );
 
 	//----------------------------------------------------------------.
 	// In the absence of more detailed research, the iOS keyboard map |

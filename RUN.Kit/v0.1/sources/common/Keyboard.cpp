@@ -9,7 +9,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 using namespace RUN;
 
-static Character const *const ansi_key_names[] {
+static Char const *const ansi_key_names[] {
 	"↑", "→", "↓", "←",
 #	if Z_OS == Z_OS_MACOS
 		"↖︎", "↘︎",
@@ -66,7 +66,7 @@ static Character const *const ansi_key_names[] {
 };
 
 
-const Character *Keyboard::Key::name() const
+const Char *Keyboard::Key::name() const
 	{
 	return ansi_key_names[scancode];
 	}

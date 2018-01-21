@@ -156,7 +156,7 @@ struct RUN_API RUN::Keyboard {
 		Z_CT_MEMBER(CPP11) Boolean is_valid() const
 			{return scancode != Invalid;}
 
-		const Character *name() const;
+		const Char *name() const;
 	};
 
 	UInt8 state[16];
