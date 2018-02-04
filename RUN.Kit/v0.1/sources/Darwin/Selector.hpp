@@ -27,81 +27,70 @@
 #include <objc/message.h>
 
 
-template <class function> struct Selector;
-template <class function, class parameter_list> struct SelectorFunctor;
+template <class F> struct Selector;
 
+template <class R, class... P> struct Selector<R(P...)> {
+	SEL selector;
 
-template <class F, class... P> struct SelectorFunctor<F, Zeta::TypeList<P...> > {
-	typedef Selector<F>* This;
-	typedef typename Zeta::Type<F>::return_type Returned;
+	typedef R (* Caller	)(id,		      SEL, P...);
+	typedef R (* SuperCaller)(struct objc_super*, SEL, P...);
 
-	typedef typename Zeta::Type<typename Zeta::TypeListToFunction<typename Zeta::TypeListPrepend<
-		Zeta::TypeList<P...>, id, SEL
-	>::type, F>::type>::add_pointer Caller;
-
-	typedef typename Zeta::Type<typename Zeta::TypeListToFunction<typename Zeta::TypeListPrepend<
-		Zeta::TypeList<P...>, struct objc_super*, SEL
-	>::type, F>::type>::add_pointer SuperCaller;
 
 #	if Z_CPU_ARCHITECTURE == Z_CPU_ARCHITECTURE_AARCH64
 		static Z_CONSTANT auto caller	    = objc_msgSend;
 		static Z_CONSTANT auto super_caller = objc_msgSendSuper;
 #	else
-		static Z_CONSTANT auto caller = Zeta::Type<Returned>::is_compound
+		static Z_CONSTANT auto caller = Zeta::Type<R>::is_compound
 			? objc_msgSend_stret
-			: (Zeta::Type<Returned>::is_real ? objc_msgSend_fpret : objc_msgSend);
+			: (Zeta::Type<R>::is_real ? objc_msgSend_fpret : objc_msgSend);
 
-		static Z_CONSTANT auto super_caller = Zeta::Type<Returned>::is_compound
+		static Z_CONSTANT auto super_caller = Zeta::Type<R>::is_compound
 			? objc_msgSendSuper_stret
 			: objc_msgSendSuper;
 #	endif
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<Zeta::Type<R>::is_void, void>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
 	operator ()(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{((Caller)objc_msgSend)(object, ((This)this)->selector, parameters...);}
+		{((Caller)objc_msgSend)(object, selector, parameters...);}
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<!Zeta::Type<R>::is_void, R>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
 	operator ()(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{return ((Caller)caller)(object, ((This)this)->selector, parameters...);}
+		{return ((Caller)caller)(object, selector, parameters...);}
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<Zeta::Type<R>::is_void, void>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
 	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		((SuperCaller)super_caller)(&object_super, ((This)this)->selector, parameters...);
+		((SuperCaller)super_caller)(&object_super, selector, parameters...);
 		}
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<!Zeta::Type<R>::is_void, R>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
 	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		return ((SuperCaller)super_caller)(&object_super, ((This)this)->selector, parameters...);
+		return ((SuperCaller)super_caller)(&object_super, selector, parameters...);
 		}
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<Zeta::Type<R>::is_void, void>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
 	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{((SuperCaller)super_caller)((struct objc_super *)&object_super, ((This)this)->selector, parameters...);}
+		{((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, parameters...);}
 
 
-	template <class R = Returned>
-	Z_INLINE_MEMBER typename Zeta::EnableIf<!Zeta::Type<R>::is_void, R>::type
+	template <bool returns_void = Zeta::Type<R>::is_void>
+	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
 	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, ((This)this)->selector, parameters...);}
-};
+		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, parameters...);}
 
-
-template <class F> struct Selector : SelectorFunctor<F, typename Zeta::Type<F>::parameters> {
-	SEL selector;
 
 	Z_INLINE_MEMBER Selector() {}
 
