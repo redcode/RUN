@@ -57,44 +57,44 @@ template <class R, class... P> struct Selector<R(P...)> {
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
-	operator ()(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{((Caller)objc_msgSend)(object, selector, parameters...);}
+	operator ()(id object, typename Zeta::Type<P>::to_forwardable... arguments) const
+		{((Caller)objc_msgSend)(object, selector, arguments...);}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
-	operator ()(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{return ((Caller)caller)(object, selector, parameters...);}
+	operator ()(id object, typename Zeta::Type<P>::to_forwardable... arguments) const
+		{return ((Caller)caller)(object, selector, arguments...);}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
-	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
+	super(id object, typename Zeta::Type<P>::to_forwardable... arguments) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		((SuperCaller)super_caller)(&object_super, selector, parameters...);
+		((SuperCaller)super_caller)(&object_super, selector, arguments...);
 		}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
-	super(id object, typename Zeta::Type<P>::to_forwardable... parameters) const
+	super(id object, typename Zeta::Type<P>::to_forwardable... arguments) const
 		{
 		struct objc_super object_super {object, [[object class] superclass]};
-		return ((SuperCaller)super_caller)(&object_super, selector, parameters...);
+		return ((SuperCaller)super_caller)(&object_super, selector, arguments...);
 		}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<returns_void, void>::type
-	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, parameters...);}
+	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... arguments) const
+		{((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, arguments...);}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
 	Z_INLINE_MEMBER typename Zeta::EnableIf<!returns_void, R>::type
-	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
-		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, parameters...);}
+	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... arguments) const
+		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, arguments...);}
 
 };
 
