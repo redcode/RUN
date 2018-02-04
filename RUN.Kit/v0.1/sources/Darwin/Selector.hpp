@@ -35,7 +35,6 @@ template <class R, class... P> struct Selector<R(P...)> {
 	typedef R (* Caller	)(id,		      SEL, P...);
 	typedef R (* SuperCaller)(struct objc_super*, SEL, P...);
 
-
 #	if Z_CPU_ARCHITECTURE == Z_CPU_ARCHITECTURE_AARCH64
 		static Z_CONSTANT auto caller	    = objc_msgSend;
 		static Z_CONSTANT auto super_caller = objc_msgSendSuper;
@@ -48,6 +47,12 @@ template <class R, class... P> struct Selector<R(P...)> {
 			? objc_msgSendSuper_stret
 			: objc_msgSendSuper;
 #	endif
+
+	Z_INLINE_MEMBER Selector() {}
+
+	Z_CT_MEMBER(CPP11) Selector(SEL selector) : selector(selector) {}
+
+	Z_CT_MEMBER(CPP11) operator SEL() const {return selector;}
 
 
 	template <bool returns_void = Zeta::Type<R>::is_void>
@@ -91,12 +96,6 @@ template <class R, class... P> struct Selector<R(P...)> {
 	super(const struct objc_super &object_super, typename Zeta::Type<P>::to_forwardable... parameters) const
 		{return ((SuperCaller)super_caller)((struct objc_super *)&object_super, selector, parameters...);}
 
-
-	Z_INLINE_MEMBER Selector() {}
-
-	Z_CT_MEMBER(CPP11) Selector(SEL selector) : selector(selector) {}
-
-	Z_CT_MEMBER(CPP11) operator SEL() const {return selector;}
 };
 
 
