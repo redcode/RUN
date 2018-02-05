@@ -124,7 +124,7 @@ static NSAutoreleasePool *pool;
 	//----------------------------------------------------------------------.
 	// Once in run-time, they are deciphered and transformed into functors. |
 	//----------------------------------------------------------------------'
-#	import "Selector.hpp"
+#	import <Z/classes/functional/Selector.hpp>
 
 	static Selector<void(id)       > $handleKeyUIEvent($$handleKeyUIEvent);
 	static Selector<id()	       > $firstResponder  ($$firstResponder  );

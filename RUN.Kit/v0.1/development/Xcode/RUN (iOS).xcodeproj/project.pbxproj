@@ -56,7 +56,6 @@
 		644033241DCAF08500F89E71 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		644033271DCAF7DB00F89E71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		645233711FCA351B009EC072 /* ObjCSecret.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObjCSecret.hpp; sourceTree = "<group>"; };
-		645233781FCA362B009EC072 /* Selector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Selector.hpp; sourceTree = "<group>"; };
 		6452337A1FCA500C009EC072 /* _RUNView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RUNView.h; sourceTree = "<group>"; };
 		648F97B81DB419D6009EA284 /* libRUN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRUN.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		648F97C71DB41AFB009EA284 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
@@ -147,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				645233711FCA351B009EC072 /* ObjCSecret.hpp */,
-				645233781FCA362B009EC072 /* Selector.hpp */,
 				64F70E9C1DCAD66800DA3802 /* system.cpp */,
 				64C6BA6B1DBCEA9700205084 /* Program.mm */,
 			);
