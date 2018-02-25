@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Texture_HPP__
@@ -12,7 +12,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 
 
-class RUN_API RUN::Texture {
+namespace RUN {class RUN_API Texture {
 	public:
 
 	enum Format {
@@ -38,7 +38,7 @@ class RUN_API RUN::Texture {
 #	ifdef RUN_TEXTURE_PRIVATE_PROTOTYPES
 		private: RUN_TEXTURE_PRIVATE_PROTOTYPES
 #	endif
-};
+};}
 
 
 #endif // __RUN_Texture_HPP__

@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Joystick_HPP__
@@ -12,8 +12,8 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <Z/classes/base/Value2D.hpp>
 
 
-struct RUN::Joystick {
-};
+namespace RUN {struct Joystick {
+};}
 
 
 #endif // __RUN_Joystick_HPP__

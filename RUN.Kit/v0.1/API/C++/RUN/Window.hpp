@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Window_HPP__
@@ -12,7 +12,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/World.hpp>
 #include <Z/classes/base/Value2D.hpp>
 
-class RUN_API RUN::Window {
+namespace RUN {class RUN_API Window {
 	protected:
 	void* native_context;
 
@@ -20,9 +20,9 @@ class RUN_API RUN::Window {
 
 	typedef UInt8 Mode;
 
-	enum {	RESIZABLE	      = 1,
-		PRESERVE_ASPECT_RATIO = 2,
-		FULL_SCREEN	      = 4
+	enum {	Resizable	    = 1,
+		PreserveAspectRatio = 2,
+		FullScreen	    = 4
 	};
 
 	World *world;
@@ -47,6 +47,6 @@ class RUN_API RUN::Window {
 	Boolean is_minimized();
 	Boolean is_visible();
 
-};
+};}
 
 #endif // __RUN_Window_HPP__

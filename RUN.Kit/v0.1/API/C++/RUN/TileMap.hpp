@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_TileMap_HPP__
@@ -16,7 +16,7 @@ namespace RUN {
 }
 
 
-class RUN_API RUN::TileMap {
+namespace RUN {class RUN_API TileMap {
 	public:
 
 	class Layer {
@@ -39,7 +39,7 @@ class RUN_API RUN::TileMap {
 #	ifdef RUN_TILE_MAP_PRIVATE_PROTOTYPES
 		private: SUGAR_TILE_MAP_PRIVATE_PROTOTYPES
 #	endif
-};
+};}
 
 
 #endif // __RUN_TileMap_HPP__

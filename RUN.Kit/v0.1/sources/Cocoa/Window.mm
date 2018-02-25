@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright © 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright © 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
@@ -53,7 +53,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	{
 	native_context = [[_RUNNativeWindow alloc]
 		initWithContentRect: size
-		styleMask:	     (mode & RESIZABLE) ? WINDOW_STYLE | NSResizableWindowMask : WINDOW_STYLE
+		styleMask:	     (mode & Resizable) ? WINDOW_STYLE | NSResizableWindowMask : WINDOW_STYLE
 		backing:	     NSBackingStoreBuffered
 		defer:		     NO];
 
@@ -90,7 +90,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	WINDOW.contentView = view;
 	[WINDOW makeFirstResponder: view];
 	//[WINDOW.contentView addSubview: system_view];
-	if (mode & PRESERVE_ASPECT_RATIO) WINDOW.contentAspectRatio = size;
+	if (mode & PreserveAspectRatio) WINDOW.contentAspectRatio = size;
 	WINDOW.delegate = WINDOW;
 	[WINDOW makeKeyAndOrderFront: nil];
 	}

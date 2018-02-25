@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_World_HPP__
@@ -26,7 +26,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #	include <RUN/Joystick.hpp>
 #endif
 
-class RUN_API RUN::World {
+namespace RUN {class RUN_API World {
 	public:
 	void*		  native_context;
 	Value2D<Real>	  size;
@@ -155,7 +155,7 @@ class RUN_API RUN::World {
 		void touches_moved();
 		void touches_cancelled();
 #	endif
-};
+};}
 
 
 #endif // __RUN_World_HPP__

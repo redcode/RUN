@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Keyboard_HPP__
@@ -11,7 +11,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/namespace.hpp>
 #include <Z/formats/keymap/Z.h>
 
-struct RUN_API RUN::Keyboard {
+namespace RUN {struct Keyboard {
 
 	struct RUN_API Key {
 		enum {	Up			   = Z_KEY_CODE_UP,
@@ -164,17 +164,17 @@ struct RUN_API RUN::Keyboard {
 	Keyboard() : state() {}
 
 
-	Z_INLINE_MEMBER operator bool() const
+	Z_INLINE_MEMBER operator Boolean() const
 		{
 #		ifdef Z_UINT128
-			return bool(*(UInt128 *)state);
+			return Boolean(*(UInt128 *)state);
 #		else
-			return bool(((UInt64 *)state)[0]) || bool(((UInt64 *)state)[1]);
+			return Boolean(((UInt64 *)state)[0]) || Boolean(((UInt64 *)state)[1]);
 #		endif
 		}
 
 
-	Z_INLINE_MEMBER bool operator[](Key key) const
+	Z_INLINE_MEMBER Boolean operator[](Key key) const
 		{return state[key / 8] & ~(1 << (key % 8));}
 
 
@@ -191,6 +191,6 @@ struct RUN_API RUN::Keyboard {
 		state[key / 8] &= ~(1 << (key % 8));
 		return *this;
 		}
-};
+};}
 
 #endif // __RUN_Keyboard_HPP__

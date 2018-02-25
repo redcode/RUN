@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Color_HPP__
@@ -11,7 +11,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/namespace.hpp>
 
 
-template <class T> struct RUN::Color {
+namespace RUN {template <class T> struct Color {
 	T r, g, b, a;
 
 
@@ -34,7 +34,7 @@ template <class T> struct RUN::Color {
 	Z_INLINE_MEMBER static Color white  () {return Color(T(1  ), T(1  ), T(1  ));}
 	Z_INLINE_MEMBER static Color yellow () {return Color(T(1  ), T(1  ), T(0  ));}
 
-};
+};}
 
 
 #endif // __RUN_Color_HPP__

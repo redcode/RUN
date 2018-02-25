@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_TextureCache_HPP__
@@ -11,9 +11,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <RUN/namespace.hpp>
 
 
-class RUN_API RUN::TextureFrame {
+namespace RUN {class RUN_API TextureFrame {
 	Texture* texture;
-};
+};}
 
 
 #endif // __RUN_TextureFrame_HPP__

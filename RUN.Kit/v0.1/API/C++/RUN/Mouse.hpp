@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright (C) 2016-2017 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef __RUN_Mouse_HPP__
@@ -12,7 +12,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <Z/classes/base/Value2D.hpp>
 
 
-struct RUN::Mouse {
+namespace RUN {struct Mouse {
 	Value2D<Real> point;
 	UInt32        button_state;
 
@@ -50,7 +50,7 @@ struct RUN::Mouse {
 		button_state &= ~(UInt32(1) << button);
 		return *this;
 		}
-};
+};}
 
 
 #endif // __RUN_Mouse_HPP__
