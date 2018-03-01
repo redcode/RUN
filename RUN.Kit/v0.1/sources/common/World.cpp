@@ -22,7 +22,7 @@ World::~World()
 
 
 void World::create_view(const Value2D<Real> &size)
-	{create_view(size, Backend::DEFAULT);}
+	{create_view(size, Backend::Default);}
 
 
 void World::update_geometry()

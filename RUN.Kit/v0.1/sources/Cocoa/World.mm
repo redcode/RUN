@@ -7,7 +7,6 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
 #import <RUN/World.hpp>
-#import <Z/types/base.h>
 #import <Z/classes/base/Status.hpp>
 #import <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 #import <Z/formats/keymap/Mac OS.h>
