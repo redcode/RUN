@@ -24,10 +24,10 @@ namespace RUN {class RUN_API Scene : public Node {
 		Real	duration;
 		Boolean cancel;
 
-		Z_INLINE_MEMBER Transition(Real duration, Update update, End end)
+		Z_INLINE Transition(Real duration, Update update, End end)
 		: duration(duration), update(update), end(end), cancel(false) {}
 
-		Z_INLINE_MEMBER Transition(Real duration, Update update)
+		Z_INLINE Transition(Real duration, Update update)
 		: Transition(duration, update, NULL) {}
 	};
 

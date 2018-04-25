@@ -15,24 +15,24 @@ namespace RUN {template <class T> struct Color {
 	T r, g, b, a;
 
 
-	Z_INLINE_MEMBER Color(T r, T g, T b, T a)
+	Z_INLINE Color(T r, T g, T b, T a)
 	: r(r), g(g), b(b), a(a) {}
 
 
-	Z_INLINE_MEMBER Color(T r, T g, T b)
+	Z_INLINE Color(T r, T g, T b)
 	: r(r), g(g), b(b), a(1) {}
 
 
-	Z_INLINE_MEMBER static Color black  () {return Color(T(0  ), T(0  ), T(0  ));}
-	Z_INLINE_MEMBER static Color blue   () {return Color(T(0  ), T(0  ), T(1  ));}
-	Z_INLINE_MEMBER static Color cyan   () {return Color(T(0  ), T(1  ), T(1  ));}
-	Z_INLINE_MEMBER static Color green  () {return Color(T(0  ), T(1  ), T(0  ));}
-	Z_INLINE_MEMBER static Color magenta() {return Color(T(1  ), T(0  ), T(1  ));}
-	Z_INLINE_MEMBER static Color orange () {return Color(T(1  ), T(0.5), T(0  ));}
-	Z_INLINE_MEMBER static Color purple () {return Color(T(0.5), T(0  ), T(0.5));}
-	Z_INLINE_MEMBER static Color red    () {return Color(T(1  ), T(0  ), T(0  ));}
-	Z_INLINE_MEMBER static Color white  () {return Color(T(1  ), T(1  ), T(1  ));}
-	Z_INLINE_MEMBER static Color yellow () {return Color(T(1  ), T(1  ), T(0  ));}
+	Z_INLINE static Color black  () {return Color(T(0  ), T(0  ), T(0  ));}
+	Z_INLINE static Color blue   () {return Color(T(0  ), T(0  ), T(1  ));}
+	Z_INLINE static Color cyan   () {return Color(T(0  ), T(1  ), T(1  ));}
+	Z_INLINE static Color green  () {return Color(T(0  ), T(1  ), T(0  ));}
+	Z_INLINE static Color magenta() {return Color(T(1  ), T(0  ), T(1  ));}
+	Z_INLINE static Color orange () {return Color(T(1  ), T(0.5), T(0  ));}
+	Z_INLINE static Color purple () {return Color(T(0.5), T(0  ), T(0.5));}
+	Z_INLINE static Color red    () {return Color(T(1  ), T(0  ), T(0  ));}
+	Z_INLINE static Color white  () {return Color(T(1  ), T(1  ), T(1  ));}
+	Z_INLINE static Color yellow () {return Color(T(1  ), T(1  ), T(0  ));}
 
 };}
 

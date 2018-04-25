@@ -19,33 +19,33 @@ namespace RUN {struct Mouse {
 	Mouse() : point(0.0), button_state(0) {}
 
 
-	Z_INLINE_MEMBER operator bool() const
+	Z_INLINE operator bool() const
 		{return button_state;}
 
 
-	Z_INLINE_MEMBER operator Value2D<Real>() const
+	Z_INLINE operator Value2D<Real>() const
 		{return point;}
 
 
-	Z_INLINE_MEMBER Mouse &operator =(const Value2D<Real> &point)
+	Z_INLINE Mouse &operator =(const Value2D<Real> &point)
 		{
 		this->point = point;
 		return *this;
 		}
 
 
-	Z_INLINE_MEMBER bool operator[](UInt8 button) const
+	Z_INLINE bool operator[](UInt8 button) const
 		{return button_state & (UInt32(1) << button);}
 
 
-	Z_INLINE_MEMBER Mouse &operator +=(UInt8 button)
+	Z_INLINE Mouse &operator +=(UInt8 button)
 		{
 		button_state |= UInt32(1) << button;
 		return *this;
 		}
 
 
-	Z_INLINE_MEMBER Mouse &operator -=(UInt8 button)
+	Z_INLINE Mouse &operator -=(UInt8 button)
 		{
 		button_state &= ~(UInt32(1) << button);
 		return *this;
