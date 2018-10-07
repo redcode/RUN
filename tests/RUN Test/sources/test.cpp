@@ -43,7 +43,7 @@ void Test::will_start()
 void Test::did_start()
 	{
 	std::cout << "did_start()\n";
-	//this->exit();
+	//this->quit();
 	}
 
 
@@ -56,5 +56,6 @@ void Test::will_quit()
 int main(int argc, char **argv)
 	{
 	Test(argc, argv).run();
+	std::cout << "main() exit\n";
 	return 0;
 	}

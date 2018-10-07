@@ -46,7 +46,7 @@ class RUN_API RUN::Program {
 	//------------------------------------
 	/// Enters to the program's main loop.
 	//------------------------------------
-	Z_NO_RETURN void run();
+	void run();
 
 #	if RUN_TARGET_IS_QUITABLE
 		//-------------------------------------------------------------

@@ -11,7 +11,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#define VIEW ((_RUNGLView *)native_context)
+#define VIEW ((_RUNGLView *)view)
 
 using namespace RUN;
 
@@ -144,7 +144,7 @@ using namespace RUN;
 
 void World::create_view(const Value2D<Real> &size, Backend backend)
 	{
-	native_context = [[_RUNGLView alloc] initWithFrame: size];
+	view = [[_RUNGLView alloc] initWithFrame: size];
 	VIEW->world = this;
 	}
 
@@ -152,7 +152,7 @@ void World::create_view(const Value2D<Real> &size, Backend backend)
 void World::destroy_view()
 	{
 	[VIEW release];
-	native_context = NULL;
+	view = NULL;
 	}
 
 

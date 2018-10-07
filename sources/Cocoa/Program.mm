@@ -11,9 +11,6 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 using namespace RUN;
 
-static NSAutoreleasePool *pool;
-
-
 @interface _RUNApplicationDelegate : NSObject <NSApplicationDelegate> {
 	@public NSMutableArray* windows;
 };
@@ -38,7 +35,7 @@ static NSAutoreleasePool *pool;
 
 	- (void) dealloc
 		{
-		[windows release];
+		NSLog(@"-[_RUNApplicationDelegate dealloc]");
 		[super dealloc];
 		}
 
@@ -52,10 +49,13 @@ static NSAutoreleasePool *pool;
 	- (void) applicationWillTerminate:	 (id) _ {Program::singleton->will_quit(); [windows release];}
 
 	- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (id) _ {return YES;}
-
 	- (void) applicationDidChangeScreenParameters:(id) _ {}
 	- (void) applicationDidHide: (id) _ {}
 @end
+
+
+static NSAutoreleasePool*	autorelease_pool;
+static _RUNApplicationDelegate* application_delegate;
 
 
 Program::Program(int argc, char **argv) : argc(argc), argv(argv)
@@ -63,7 +63,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	//---------------------------------------------------------------.
 	// Create the global autorelease pool and the Cocoa application. |
 	//---------------------------------------------------------------'
-	pool = [[NSAutoreleasePool alloc] init];
+	autorelease_pool = [[NSAutoreleasePool alloc] init];
 	[NSApplication sharedApplication];
 
 	//------------------------------------------.
@@ -77,8 +77,8 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	if (![NSThread isMultiThreaded])
 		{
 		NSLog(@"ERROR: Cocoa failed to enter multithreading mode.");
-		[pool drain];
-		return;
+		[autorelease_pool drain];
+		exit(-1);
 		}
 
 	//-----------------------------------------------------------------------------.
@@ -190,7 +190,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	//----------------------------------------------------------------------------.
 	// Create the Cocoa application's delegate needed to control the application. |
 	//----------------------------------------------------------------------------'
-	NSApp.delegate = [[_RUNApplicationDelegate alloc] init];
+	NSApp.delegate = application_delegate = [[_RUNApplicationDelegate alloc] init];
 
 	//--------------------------------------------.
 	// Set this instance as the singleton object. |
@@ -199,28 +199,32 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	}
 
 
-Program::~Program()
+void destroy_program(void)
 	{
-	id application_delegate = NSApp.delegate;
-	NSApp.delegate = nil;
-	[application_delegate release];
-	[pool drain];
-	singleton = NULL;
+	NSLog(@"destroy()");
+	if (Program::singleton)
+		{
+		NSLog(@"destroy()!");
+		Program::singleton->~Program();
+		}
 	}
 
 
-Z_NO_RETURN void Program::run()
+Program::~Program()
 	{
-	[NSApp finishLaunching];
-	NSDate *distant_future = NSDate.distantFuture;
+	NSLog(@"Program::~Program()");
+	NSApp.delegate = nil;
+	NSLog(@"count => %lu", application_delegate.retainCount);
+	[application_delegate release];
+	[autorelease_pool drain];
+	Program::singleton = NULL;
+	}
 
-	loop: [NSApp sendEvent: [NSApp
-		nextEventMatchingMask: NSAnyEventMask
-		untilDate:	       distant_future
-                inMode:		       NSDefaultRunLoopMode
-                dequeue:	       YES]];
 
-	goto loop;
+void Program::run()
+	{
+	atexit(destroy_program);
+	[NSApp run];
 	}
 
 

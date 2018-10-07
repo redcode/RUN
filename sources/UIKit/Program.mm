@@ -10,6 +10,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <Availability.h>
 
 using namespace RUN;
+using namespace Zeta;
 
 static NSAutoreleasePool *pool;
 
@@ -285,7 +286,10 @@ Program::~Program()
 
 
 void Program::run()
-	{UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");}
+	{
+	UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");
+	NSLog(@"Program::run() exit");
+	}
 
 
 
