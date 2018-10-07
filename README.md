@@ -28,12 +28,12 @@ In alphabetical order:
 ### Goals
 
 * 2D/3D.
-* Multi-renderer (OpenGL, Vulkan, DirectX, etc).
+* Multi-renderer (OpenGL, Vulkan, DirectX, and Metal).
 * Multi-platform (Same API in any OS).
 * Fast and Small.
 * Easy to use and to understand.
 * Optional/pluggable ECS subsystem.
-* Lua and Ruby scripting.
+* Lua scripting.
 
 ### To do
 Almost everything.
