@@ -6,7 +6,7 @@ Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
-#import <RUN/World.hpp>
+#import <RUN/View.hpp>
 #import <Z/classes/base/Status.hpp>
 #import <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 #import <Z/formats/keymap/Mac OS.h>
@@ -16,13 +16,11 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <OpenGL/gl.h>
 #import <OpenGL/OpenGL.h>
 
-#define VIEW ((_RUNGLView *)view)
-
 using namespace RUN;
 
 @interface _RUNView : NSView {
 	@public
-	World* world;
+	View*  _owner;
 	UInt32 _modifier_keys;
 	Real   _ppp;
 };
@@ -36,7 +34,7 @@ using namespace RUN;
 		{
 		auto window = self.window;
 		_ppp = window ? window.backingScaleFactor : 1.0;
-		world->update_geometry();
+		_owner->update_geometry();
 		}
 
 	- (BOOL) acceptsFirstResponder {return YES;}
@@ -47,8 +45,8 @@ using namespace RUN;
 	- (void) setFrameSize: (NSSize) size
 		{
 		super.frameSize = size;
-		world->size = Value2D<Real>(Real(size.width) * _ppp, Real(size.height) * _ppp);
-		world->update_geometry();
+		_owner->size = Value2D<Real>(Real(size.width) * _ppp, Real(size.height) * _ppp);
+		_owner->update_geometry();
 		}
 
 
@@ -58,28 +56,28 @@ using namespace RUN;
 
 		super.frame = frame;
 
-		if (world->size != size)
+		if (_owner->size != size)
 			{
-			world->size = size;
-			world->update_geometry();
+			_owner->size = size;
+			_owner->update_geometry();
 			}
 		}
 
 
 #	define EVENT_POINT Value2D<Real>([self convertPoint: event.locationInWindow fromView: nil]) * _ppp
 
-	- (void) mouseEntered:	    (NSEvent *) event {world->mouse_entered(EVENT_POINT);}
-	- (void) mouseExited:	    (NSEvent *) event {world->mouse_exited (EVENT_POINT);}
-	- (void) mouseDown:	    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
-	- (void) rightMouseDown:    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
-	- (void) otherMouseDown:    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
-	- (void) mouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
-	- (void) rightMouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
-	- (void) otherMouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
-	- (void) mouseMoved:	    (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
-	- (void) mouseDragged:	    (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
-	- (void) rightMouseDragged: (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
-	- (void) otherMouseDragged: (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
+	- (void) mouseEntered:	    (NSEvent *) event {_owner->mouse_entered(EVENT_POINT);}
+	- (void) mouseExited:	    (NSEvent *) event {_owner->mouse_exited (EVENT_POINT);}
+	- (void) mouseDown:	    (NSEvent *) event {_owner->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) rightMouseDown:    (NSEvent *) event {_owner->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) otherMouseDown:    (NSEvent *) event {_owner->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) mouseUp:	    (NSEvent *) event {_owner->mouse_up     (EVENT_POINT, event.buttonNumber);}
+	- (void) rightMouseUp:	    (NSEvent *) event {_owner->mouse_up     (EVENT_POINT, event.buttonNumber);}
+	- (void) otherMouseUp:	    (NSEvent *) event {_owner->mouse_up     (EVENT_POINT, event.buttonNumber);}
+	- (void) mouseMoved:	    (NSEvent *) event {_owner->mouse_moved  (EVENT_POINT);}
+	- (void) mouseDragged:	    (NSEvent *) event {_owner->mouse_moved  (EVENT_POINT);}
+	- (void) rightMouseDragged: (NSEvent *) event {_owner->mouse_moved  (EVENT_POINT);}
+	- (void) otherMouseDragged: (NSEvent *) event {_owner->mouse_moved  (EVENT_POINT);}
 
 #	undef EVENT_POINT
 
@@ -93,7 +91,7 @@ using namespace RUN;
 			{
 			Keyboard::Key key(keymap[event.keyCode & 0x7F]);
 
-			if (key.is_valid()) world->key_down(key);
+			if (key.is_valid()) _owner->key_down(key);
 			}
 		}
 
@@ -104,7 +102,7 @@ using namespace RUN;
 			{
 			Keyboard::Key key(keymap[event.keyCode & 0x7F]);
 
-			if (key.is_valid()) world->key_up(key);
+			if (key.is_valid()) _owner->key_up(key);
 			}
 		}
 
@@ -114,11 +112,11 @@ using namespace RUN;
 		UInt32 keys = UInt32(event.modifierFlags);
 		UInt32 changed = _modifier_keys ^ keys;
 
-#		define HANDLE_KEY(mask, key)								  \
-			if (changed & Z_MAC_OS_KEY_MASK_##mask)						  \
-				{									  \
-				if (keys & Z_MAC_OS_KEY_MASK_##mask) world->key_down(Keyboard::Key::key); \
-				else world->key_up(Keyboard::Key::key);					  \
+#		define HANDLE_KEY(mask, key)								   \
+			if (changed & Z_MAC_OS_KEY_MASK_##mask)						   \
+				{									   \
+				if (keys & Z_MAC_OS_KEY_MASK_##mask) _owner->key_down(Keyboard::Key::key); \
+				else _owner->key_up(Keyboard::Key::key);				   \
 				}
 
 		HANDLE_KEY(CAPS_LOCK,	  CapsLock    )
@@ -234,17 +232,17 @@ using namespace RUN;
 @end
 
 
-void World::create_view(const Value2D<Real> &size, Backend backend)
+void View::create_view(const Value2D<Real> &size, Backend backend)
 	{
-	((_RUNGLView *)(view = [[_RUNGLView alloc] initWithFrame: size]))->world = this;
+	((_RUNGLView *)(native = [[_RUNGLView alloc] initWithFrame: size]))->_owner = this;
 	}
 
 
-void World::destroy_view()
+void View::destroy_view()
 	{
-	[VIEW release];
-	view = NULL;
+	[(_RUNGLView *)native release];
+	native = NULL;
 	}
 
 
-// Cocoa/World.mm EOF
+// Cocoa/View.mm EOF

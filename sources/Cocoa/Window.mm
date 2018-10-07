@@ -11,20 +11,20 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 #include <Cocoa/Cocoa.h>
 
-#define WINDOW	     ((_RUNNativeWindow *)native_context)
+#define NATIVE_WINDOW ((_RUNWindow *)native)
 #define WINDOW_STYLE NSClosableWindowMask | NSMiniaturizableWindowMask | NSTitledWindowMask
 
 using namespace RUN;
 using Zeta::Rectangle;
 
 
-@interface _RUNNativeWindow : NSWindow <NSWindowDelegate> {
+@interface _RUNWindow : NSWindow <NSWindowDelegate> {
 	@public
 	Window *window;
 } @end
 
 
-@implementation _RUNNativeWindow
+@implementation _RUNWindow
 	- (BOOL) canBecomeKeyWindow {return YES;};
 
 
@@ -52,69 +52,69 @@ static NSScreen *suitable_screen_for_size(NSScreen *current_screen, const Value2
 
 Window::Window(const Value2D<Real> &size, Mode mode)
 	{
-	native_context = [[_RUNNativeWindow alloc]
+	native = [[_RUNWindow alloc]
 		initWithContentRect: size
 		styleMask:	     (mode & Resizable) ? WINDOW_STYLE | NSResizableWindowMask : WINDOW_STYLE
 		backing:	     NSBackingStoreBuffered
 		defer:		     NO];
 
-	WINDOW.title		       = @(Program::singleton->name().c_str());
-	WINDOW.restorable	       = NO;
-	WINDOW.acceptsMouseMovedEvents = YES;
-	WINDOW->window		       = this;
+	NATIVE_WINDOW.title		      = @(Program::singleton->name().c_str());
+	NATIVE_WINDOW.restorable	      = NO;
+	NATIVE_WINDOW.acceptsMouseMovedEvents = YES;
+	NATIVE_WINDOW->window		      = this;
 
-	Value2D<Real> window_size = WINDOW.frame.size;
+	Value2D<Real> window_size = NATIVE_WINDOW.frame.size;
 	Rectangle<Real> screen_frame = suitable_screen_for_size(NSScreen.mainScreen, window_size).visibleFrame;
 
 	if (screen_frame.size < window_size)
 		{
-		auto window_border = window_size - ((NSView *)WINDOW.contentView).bounds.size;
+		auto window_border = window_size - ((NSView *)NATIVE_WINDOW.contentView).bounds.size;
 
 		window_size = window_border + (window_size - window_border).fit(screen_frame.size - window_border);
 		if (window_size.y == screen_frame.size.y) window_size.x = floor(window_size.x);
 		else window_size.y = floor(window_size.y);
 		}
 
-	[WINDOW setFrame: Rectangle<Real>
+	[NATIVE_WINDOW
+		setFrame: Rectangle<Real>
 			(screen_frame.point.x + round(screen_frame.size.x  - window_size.x) / 2.0,
 			 screen_frame.point.y + floor((screen_frame.size.y - window_size.y) * 2.0 / 3.0),
 			 window_size)
 		display: YES];
 
-	world = new World();
-	world->create_view([WINDOW.contentView frame].size);
-	NSView *view = (NSView *)world->view;
+	view = new View();
+	view->create_view([NATIVE_WINDOW.contentView frame].size);
 
 	//view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-	//[WINDOW.contentView addSubview: view];
+	//[WINDOW.contentView addSubview: (NSView *)view->native];
 
-	WINDOW.contentView = view;
-	[WINDOW makeFirstResponder: view];
+	NATIVE_WINDOW.contentView = (NSView *)view->native;
+	[NATIVE_WINDOW makeFirstResponder: (NSView *)view->native];
 	//[WINDOW.contentView addSubview: system_view];
-	if (mode & PreserveAspectRatio) WINDOW.contentAspectRatio = size;
-	WINDOW.delegate = WINDOW;
-	[WINDOW makeKeyAndOrderFront: nil];
+	if (mode & PreserveAspectRatio) NATIVE_WINDOW.contentAspectRatio = size;
+	NATIVE_WINDOW.delegate = NATIVE_WINDOW;
+	[NATIVE_WINDOW makeKeyAndOrderFront: nil];
 	}
 
 
 Window::~Window()
 	{
-	[WINDOW performClose: nil];
-	WINDOW.delegate = nil;
-	[WINDOW release];
+	[NATIVE_WINDOW performClose: nil];
+	NATIVE_WINDOW.delegate = nil;
+	[NATIVE_WINDOW release];
 	}
 
 
 Value2D<Real> Window::content_size() const
-	{return WINDOW.frame.size;}
+	{return NATIVE_WINDOW.frame.size;}
 
 
 void Window::set_content_size(const Value2D<Real> &size)
 	{
-	Rectangle<Real> screen_frame = WINDOW.screen.visibleFrame;
-	Rectangle<Real> window_frame = WINDOW.frame;
+	Rectangle<Real> screen_frame = NATIVE_WINDOW.screen.visibleFrame;
+	Rectangle<Real> window_frame = NATIVE_WINDOW.frame;
 	auto window_top_center = window_frame.top_center();
-	auto window_border = window_frame.size - ((NSView *)WINDOW.contentView).bounds.size;
+	auto window_border = window_frame.size - ((NSView *)NATIVE_WINDOW.contentView).bounds.size;
 
 	if (screen_frame.size < (window_border + size))
 		{
@@ -131,28 +131,28 @@ void Window::set_content_size(const Value2D<Real> &size)
 		? screen_frame.point.y
 		: window_top_center.y - window_frame.size.y;
 
-	[WINDOW setFrame: window_frame display: YES];
+	[NATIVE_WINDOW setFrame: window_frame display: YES];
 	}
 
 
 Value2D<Real> Window::content_aspect_ratio() const
-	{return WINDOW.contentAspectRatio;}
+	{return NATIVE_WINDOW.contentAspectRatio;}
 
 
 void Window::set_content_aspect_ratio(const Value2D<Real> &aspect_ratio)
-	{WINDOW.contentAspectRatio = aspect_ratio;}
+	{NATIVE_WINDOW.contentAspectRatio = aspect_ratio;}
 
 
 String Window::title() const
-	{return WINDOW.title.UTF8String;}
+	{return NATIVE_WINDOW.title.UTF8String;}
 
 
 void Window::set_title(const String &title)
-	{WINDOW.title = @(title.c_str());}
+	{NATIVE_WINDOW.title = @(title.c_str());}
 
 
 Zeta::Boolean Window::full_screen() const
-	{return ((WINDOW.styleMask & NSFullScreenWindowMask) == NSFullScreenWindowMask);}
+	{return ((NATIVE_WINDOW.styleMask & NSFullScreenWindowMask) == NSFullScreenWindowMask);}
 
 
 void Window::set_full_screen(Zeta::Boolean value)
@@ -160,10 +160,10 @@ void Window::set_full_screen(Zeta::Boolean value)
 	}
 
 
-Zeta::Boolean Window::is_focused  () {return WINDOW.isKeyWindow;}
-Zeta::Boolean Window::is_maximized() {return WINDOW.isZoomed;}
-Zeta::Boolean Window::is_minimized() {return WINDOW.isMiniaturized;}
-Zeta::Boolean Window::is_visible  () {return WINDOW.isVisible;}
+Zeta::Boolean Window::is_focused  () {return NATIVE_WINDOW.isKeyWindow;}
+Zeta::Boolean Window::is_maximized() {return NATIVE_WINDOW.isZoomed;}
+Zeta::Boolean Window::is_minimized() {return NATIVE_WINDOW.isMiniaturized;}
+Zeta::Boolean Window::is_visible  () {return NATIVE_WINDOW.isVisible;}
 
 
 // Cocoa/Window.mm EOF

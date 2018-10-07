@@ -88,12 +88,14 @@ namespace RUN {
 
 	template <class T> struct Color;
 
-	class Camera;
 	//struct KeyCode;
 	struct Keyboard;
 	struct Mouse;
 	struct Joystick;
 	struct Touch;
+
+	class Camera;
+	class Director;
 	class Layer;
 	class Node;
 	class ParticleSystem;
@@ -105,8 +107,8 @@ namespace RUN {
 	class TextureCache;
 	class TileMap;
 	class Video;
+	class View;
 	class Window;
-	class World;
 }
 
 #endif // __RUN_scope_HPP__

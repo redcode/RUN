@@ -1,12 +1,12 @@
-/* RUN Kit C++ API - World.hpp
+/* RUN Kit C++ API - View.hpp
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_World_HPP__
-#define __RUN_World_HPP__
+#ifndef __RUN_View_HPP__
+#define __RUN_View_HPP__
 
 #include <RUN/Backend.hpp>
 #include <RUN/Scene.hpp>
@@ -34,9 +34,9 @@ namespace RUN {
 	using Zeta::Value2D;
 }
 
-class RUN_API RUN::World {
+class RUN_API RUN::View {
 	public:
-	void*		  view;
+	void*		  native;
 	Value2D<Real>	  size;
 	Shared<Scene>	  root_scene;
 	Scene*		  scene;
@@ -57,8 +57,8 @@ class RUN_API RUN::World {
 
 	public:
 
-	World();
-	~World();
+	View();
+	~View();
 
 	void create_view(const Value2D<Real> &size);
 	void create_view(const Value2D<Real> &size, Backend backend);
@@ -164,4 +164,4 @@ class RUN_API RUN::World {
 };
 
 
-#endif // __RUN_World_HPP__
+#endif // __RUN_View_HPP__

@@ -8,6 +8,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <RUN/Program.hpp>
 #import <RUN/Window.hpp>
 #import <Cocoa/Cocoa.h>
+#import <stdlib.h>
 
 using namespace RUN;
 
@@ -22,31 +23,26 @@ using namespace RUN;
 	+ (void) nop: (id) object {}
 
 
-	- (id) init
+	- (void) applicationWillFinishLaunching: (id) _
 		{
-		if ((self = [super init]))
-			{
-			windows = [[NSMutableArray alloc] init];
-			}
-
-		return self;
+		windows = [[NSMutableArray alloc] init];
+		Program::singleton->will_start();
 		}
 
 
-	- (void) dealloc
-		{
-		NSLog(@"-[_RUNApplicationDelegate dealloc]");
-		[super dealloc];
-		}
-
-
-	- (void) applicationWillFinishLaunching: (id) _ {Program::singleton->will_start		  ();}
 	- (void) applicationDidFinishLaunching:	 (id) _ {Program::singleton->did_start		  ();}
 	- (void) applicationWillResignActive:	 (id) _ {Program::singleton->will_enter_background();}
 	- (void) applicationDidResignActive:	 (id) _ {Program::singleton->did_enter_background ();}
 	- (void) applicationWillBecomeActive:	 (id) _ {Program::singleton->will_enter_foreground();}
 	- (void) applicationDidBecomeActive:	 (id) _ {Program::singleton->did_enter_foreground ();}
-	- (void) applicationWillTerminate:	 (id) _ {Program::singleton->will_quit(); [windows release];}
+
+
+	- (void) applicationWillTerminate: (id) _
+		{
+		Program::singleton->will_quit();
+		[windows release];
+		}
+
 
 	- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (id) _ {return YES;}
 	- (void) applicationDidChangeScreenParameters:(id) _ {}

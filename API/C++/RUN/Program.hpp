@@ -8,18 +8,20 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Program_HPP__
 #define __RUN_Program_HPP__
 
-#include <RUN/World.hpp>
+#include <RUN/View.hpp>
 
 class RUN_API RUN::Program {
-	protected:
-	Array<World *> _active_worlds;
-
 	public:
 
 	//-----------------------------------
 	/// Pointer to the program singleton.
 	//-----------------------------------
 	static Program* singleton;
+
+	protected:
+	Array<View *> _active_views;
+
+	public:
 
 	//------------------------------------------------
 	/// The number of arguments passed to the program.
@@ -55,8 +57,8 @@ class RUN_API RUN::Program {
 		void quit();
 #	endif
 
-	void schedule_world(World *world);
-	void unschedule_world(World *world);
+	void schedule_view(View *world);
+	void unschedule_view(View *world);
 
 	//------------------------------------------------------------
 	/// Opens an URL using the operating system's default browser.

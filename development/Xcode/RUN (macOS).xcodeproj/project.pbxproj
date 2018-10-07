@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		642088A51DAE687700B8E59C /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3291DA588150088E3F4 /* Window.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		642088A61DAE687B00B8E59C /* World.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED32B1DA591170088E3F4 /* World.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		642088A61DAE687B00B8E59C /* View.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED32B1DA591170088E3F4 /* View.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088A71DAE687B00B8E59C /* Program.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED32C1DA591230088E3F4 /* Program.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088A81DAE687B00B8E59C /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3331DA5BC9D0088E3F4 /* Texture.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088A91DAE687B00B8E59C /* TileMap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3321DA5BC330088E3F4 /* TileMap.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AB1DAE687B00B8E59C /* Screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3281DA588090088E3F4 /* Screen.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AD1DAE687B00B8E59C /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 642088A41DAE686D00B8E59C /* Node.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AF1DAE696A00B8E59C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 642088AE1DAE696A00B8E59C /* Node.cpp */; };
-		6430537E1DBE3F1500BDA4F3 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6430537D1DBE3F1500BDA4F3 /* World.cpp */; };
+		6430537E1DBE3F1500BDA4F3 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6430537D1DBE3F1500BDA4F3 /* View.cpp */; };
 		643053801DBE482C00BDA4F3 /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6430537F1DBE482C00BDA4F3 /* system.cpp */; };
 		645233751FCA35AD009EC072 /* ObjCSecret.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 645233741FCA35AD009EC072 /* ObjCSecret.hpp */; };
 		648AF1C21DB5F6DC0007A4CC /* scope.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 648AF1C11DB5F6DC0007A4CC /* scope.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -29,7 +29,7 @@
 		64BC8E751DB0FFF400226634 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64BC8E741DB0FFF400226634 /* TextureCache.cpp */; };
 		64BC8E771DB1004500226634 /* TextureFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64BC8E761DB1004500226634 /* TextureFrame.cpp */; };
 		64BED31F1DA587750088E3F4 /* Screen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED31E1DA587750088E3F4 /* Screen.mm */; };
-		64BED3211DA5879C0088E3F4 /* World.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED3201DA5879C0088E3F4 /* World.mm */; };
+		64BED3211DA5879C0088E3F4 /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED3201DA5879C0088E3F4 /* View.mm */; };
 		64BED3231DA587B10088E3F4 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED3221DA587B10088E3F4 /* Window.mm */; };
 		64BED32E1DA593F00088E3F4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BED32D1DA593F00088E3F4 /* OpenGL.framework */; };
 		64BED3301DA594070088E3F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64BED32F1DA594070088E3F4 /* Cocoa.framework */; };
@@ -49,12 +49,13 @@
 		64F70E991DCA86F100DA3802 /* Mouse.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64F70E981DCA86F100DA3802 /* Mouse.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		64F70E9B1DCAD3F300DA3802 /* Joystick.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64F70E9A1DCAD3F300DA3802 /* Joystick.hpp */; };
 		64F7AFA91DC45EF4001845E4 /* Backend.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64F7AFA81DC45EF4001845E4 /* Backend.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		64F8680C216A6E9E0068239C /* Director.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64F8680B216A6E940068239C /* Director.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		642088A41DAE686D00B8E59C /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		642088AE1DAE696A00B8E59C /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
-		6430537D1DBE3F1500BDA4F3 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
+		6430537D1DBE3F1500BDA4F3 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
 		6430537F1DBE482C00BDA4F3 /* system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = system.cpp; sourceTree = "<group>"; };
 		645233741FCA35AD009EC072 /* ObjCSecret.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjCSecret.hpp; sourceTree = "<group>"; };
 		648AF1C11DB5F6DC0007A4CC /* scope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scope.hpp; sourceTree = "<group>"; };
@@ -72,11 +73,11 @@
 		64BC8E761DB1004500226634 /* TextureFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureFrame.cpp; sourceTree = "<group>"; };
 		64BED3101DA583B10088E3F4 /* libRUN.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libRUN.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		64BED31E1DA587750088E3F4 /* Screen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Screen.mm; sourceTree = "<group>"; };
-		64BED3201DA5879C0088E3F4 /* World.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = World.mm; sourceTree = "<group>"; };
+		64BED3201DA5879C0088E3F4 /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		64BED3221DA587B10088E3F4 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Window.mm; sourceTree = "<group>"; };
 		64BED3281DA588090088E3F4 /* Screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Screen.hpp; sourceTree = "<group>"; };
 		64BED3291DA588150088E3F4 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
-		64BED32B1DA591170088E3F4 /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
+		64BED32B1DA591170088E3F4 /* View.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		64BED32C1DA591230088E3F4 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
 		64BED32D1DA593F00088E3F4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		64BED32F1DA594070088E3F4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -96,6 +97,7 @@
 		64F70E981DCA86F100DA3802 /* Mouse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mouse.hpp; sourceTree = "<group>"; };
 		64F70E9A1DCAD3F300DA3802 /* Joystick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Joystick.hpp; sourceTree = "<group>"; };
 		64F7AFA81DC45EF4001845E4 /* Backend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Backend.hpp; sourceTree = "<group>"; };
+		64F8680B216A6E940068239C /* Director.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Director.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +134,7 @@
 				64BC8E761DB1004500226634 /* TextureFrame.cpp */,
 				64BED3351DA5C1C40088E3F4 /* TileMap.cpp */,
 				64E28FA81DB218D700D1C245 /* Video.cpp */,
-				6430537D1DBE3F1500BDA4F3 /* World.cpp */,
+				6430537D1DBE3F1500BDA4F3 /* View.cpp */,
 			);
 			name = Common;
 			path = common;
@@ -195,6 +197,7 @@
 				648AF1C11DB5F6DC0007A4CC /* scope.hpp */,
 				64F7AFA81DC45EF4001845E4 /* Backend.hpp */,
 				64EE8A731DCEE6D500780976 /* Color.hpp */,
+				64F8680B216A6E940068239C /* Director.hpp */,
 				64F70E981DCA86F100DA3802 /* Mouse.hpp */,
 				64F70E9A1DCAD3F300DA3802 /* Joystick.hpp */,
 				64F512701DC93C360015BF34 /* Keyboard.hpp */,
@@ -208,7 +211,7 @@
 				64BC8E731DB0FF5600226634 /* TextureFrame.hpp */,
 				64BED3321DA5BC330088E3F4 /* TileMap.hpp */,
 				64E28FA41DB2186900D1C245 /* Video.hpp */,
-				64BED32B1DA591170088E3F4 /* World.hpp */,
+				64BED32B1DA591170088E3F4 /* View.hpp */,
 				64BED3291DA588150088E3F4 /* Window.hpp */,
 			);
 			name = API;
@@ -219,7 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				64BED31E1DA587750088E3F4 /* Screen.mm */,
-				64BED3201DA5879C0088E3F4 /* World.mm */,
+				64BED3201DA5879C0088E3F4 /* View.mm */,
 				64BED3221DA587B10088E3F4 /* Window.mm */,
 				648F97FB1DB49941009EA284 /* Program.mm */,
 			);
@@ -289,8 +292,9 @@
 				64E28FA61DB2187500D1C245 /* TextureCache.hpp in Headers */,
 				642088A81DAE687B00B8E59C /* Texture.hpp in Headers */,
 				642088A91DAE687B00B8E59C /* TileMap.hpp in Headers */,
-				642088A61DAE687B00B8E59C /* World.hpp in Headers */,
+				642088A61DAE687B00B8E59C /* View.hpp in Headers */,
 				642088A71DAE687B00B8E59C /* Program.hpp in Headers */,
+				64F8680C216A6E9E0068239C /* Director.hpp in Headers */,
 				64F512711DC93C360015BF34 /* Keyboard.hpp in Headers */,
 				64E28FA71DB2187500D1C245 /* TextureFrame.hpp in Headers */,
 				642088A51DAE687700B8E59C /* Window.hpp in Headers */,
@@ -401,14 +405,14 @@
 			files = (
 				64F512731DC93C780015BF34 /* Keyboard.cpp in Sources */,
 				64BB512C1DB5138F00E33801 /* Program.cpp in Sources */,
-				64BED3211DA5879C0088E3F4 /* World.mm in Sources */,
+				64BED3211DA5879C0088E3F4 /* View.mm in Sources */,
 				64EE8A701DCEA4FE00780976 /* Scene.cpp in Sources */,
 				648F97FC1DB49941009EA284 /* Program.mm in Sources */,
 				64BED3381DA5C6180088E3F4 /* Texture.cpp in Sources */,
 				64BED3231DA587B10088E3F4 /* Window.mm in Sources */,
 				64E28FA91DB218D700D1C245 /* Video.cpp in Sources */,
 				64BED31F1DA587750088E3F4 /* Screen.mm in Sources */,
-				6430537E1DBE3F1500BDA4F3 /* World.cpp in Sources */,
+				6430537E1DBE3F1500BDA4F3 /* View.cpp in Sources */,
 				64BED3361DA5C1C40088E3F4 /* TileMap.cpp in Sources */,
 				64E28FAD1DB219A300D1C245 /* ParticleSystem.cpp in Sources */,
 				64C6BA6A1DBCEA6F00205084 /* Program.mm in Sources */,

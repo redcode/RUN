@@ -8,11 +8,11 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Window_HPP__
 #define __RUN_Window_HPP__
 
-#include <RUN/World.hpp>
+#include <RUN/View.hpp>
 
 class RUN_API RUN::Window {
 	protected:
-	void* native_context;
+	void* native;
 
 	public:
 
@@ -23,7 +23,7 @@ class RUN_API RUN::Window {
 		FullScreen	    = 4
 	};
 
-	World *world;
+	View *view;
 
 	Window(const Value2D<Real> &cotent_size, Mode mode);
 	virtual ~Window();

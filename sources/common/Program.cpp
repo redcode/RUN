@@ -12,17 +12,17 @@ using namespace RUN;
 Program *Program::singleton = NULL;
 
 
-void Program::schedule_world(World *world)
+void Program::schedule_view(View *view)
 	{
-	_active_worlds.push_back(world);
+	_active_views.push_back(view);
 	}
 
 
-void Program::unschedule_world(World *world)
+void Program::unschedule_view(View *view)
 	{
-	for (auto i = _active_worlds.size(); i;) if (_active_worlds[--i] == world)
+	for (auto i = _active_views.size(); i;) if (_active_views[--i] == view)
 		{
-		_active_worlds.erase(_active_worlds.begin() + i);
+		_active_views.erase(_active_views.begin() + i);
 		return;
 		}
 	}
