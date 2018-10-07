@@ -2,23 +2,20 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright © 2016-2018 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#include <RUN/Program.hpp>
-#include <RUN/Window.hpp>
-#include <Cocoa/Cocoa.h>
-
-#define APPLICATION_DELEGATE ((_RUNApplicationDelegate *)_native_context)
+#import <RUN/Program.hpp>
+#import <RUN/Window.hpp>
+#import <Cocoa/Cocoa.h>
 
 using namespace RUN;
 
-static NSAutoreleasePool* pool;
+static NSAutoreleasePool *pool;
 
 
 @interface _RUNApplicationDelegate : NSObject <NSApplicationDelegate> {
-	@public
-	NSMutableArray* windows;
+	@public NSMutableArray* windows;
 };
 @end
 
@@ -58,7 +55,6 @@ static NSAutoreleasePool* pool;
 
 	- (void) applicationDidChangeScreenParameters:(id) _ {}
 	- (void) applicationDidHide: (id) _ {}
-
 @end
 
 
@@ -86,7 +82,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	//-----------------------------.
 	// Get the application's name. |
 	//-----------------------------'
-	auto name = @(this->name().c_str());
+	auto name = this->name().c_str();
 
 	//------------------------------.
 	// Create the application menu. |
@@ -97,30 +93,30 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 
 	menu = [[NSMenu alloc] init];
 
-	[menu	addItemWithTitle: [@"About " stringByAppendingString: name]
+	[menu	addItemWithTitle: [NSString stringWithFormat: @"About %s", name]
 		action:		  @selector(orderFrontStandardAboutPanel:)
 		keyEquivalent:	  @""];
 
 	[menu addItem: [NSMenuItem separatorItem]];
 
 	auto services_menu = [[NSMenu alloc] init];
-	[NSApp setServicesMenu: services_menu];
+	NSApp.servicesMenu = services_menu;
 
 	[menu	addItemWithTitle: @"Services"
 		action:		  nil
 		keyEquivalent:	  @""]
-	.submenu = services_menu;
+			.submenu = services_menu;
 
 	[menu addItem: [NSMenuItem separatorItem]];
 
-	[menu	addItemWithTitle: [@"Hide " stringByAppendingString: name]
+	[menu	addItemWithTitle: [NSString stringWithFormat: @"Hide %s", name]
 		action:		  @selector(hide:)
 		keyEquivalent:	  @"h"];
 
 	[menu	addItemWithTitle: @"Hide Others"
 		action:		  @selector(hideOtherApplications:)
 		keyEquivalent:	  @"h"]
-	.keyEquivalentModifierMask = NSAlternateKeyMask | NSCommandKeyMask;
+			.keyEquivalentModifierMask = NSAlternateKeyMask | NSCommandKeyMask;
 
 	[menu	addItemWithTitle: @"Show All"
 		action:		  @selector(unhideAllApplications:)
@@ -128,7 +124,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 
 	[menu addItem: [NSMenuItem separatorItem]];
 
-	[menu	addItemWithTitle: [@"Quit " stringByAppendingString: name]
+	[menu	addItemWithTitle: [NSString stringWithFormat: @"Quit %s", name]
 		action:		  @selector(terminate:)
 		keyEquivalent:	  @"q"];
 
@@ -174,7 +170,7 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	[menu	addItemWithTitle: @"Enter Full Screen"
 		action:		  @selector(toggleFullScreen:)
 		keyEquivalent:	  @"f"]
-	.keyEquivalentModifierMask = NSControlKeyMask | NSCommandKeyMask;
+			.keyEquivalentModifierMask = NSControlKeyMask | NSCommandKeyMask;
 
 	[menu addItem: [NSMenuItem separatorItem]];
 
@@ -182,14 +178,12 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	[menu release];
 	[main_menu addItem: item];
 	[item release];
-	[NSApp setWindowsMenu: menu];
+	NSApp.windowsMenu = menu;
 
-	//--------------------------------------------------------------------------.
-	// Create the Cocoa application delegate needed to control the application. |
-	//--------------------------------------------------------------------------'
-	_native_context = [[_RUNApplicationDelegate alloc] init];
-	NSApp.delegate = APPLICATION_DELEGATE;
-	//[APPLICATION_DELEGATE release];
+	//----------------------------------------------------------------------------.
+	// Create the Cocoa application's delegate needed to control the application. |
+	//----------------------------------------------------------------------------'
+	NSApp.delegate = [[_RUNApplicationDelegate alloc] init];
 
 	//--------------------------------------------.
 	// Set this instance as the singleton object. |
@@ -200,56 +194,31 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 
 Program::~Program()
 	{
+	id application_delegate = NSApp.delegate;
 	NSApp.delegate = nil;
-	[APPLICATION_DELEGATE release];
+	[application_delegate release];
 	[pool drain];
 	singleton = NULL;
 	}
 
 
-void Program::run()
+Z_NO_RETURN void Program::run()
 	{
 	[NSApp finishLaunching];
-	NSDate *distant_future = NSDate.distantFuture, *date = distant_future;
-        NSEvent* event;
+	NSDate *distant_future = NSDate.distantFuture;
 
-	loop: if ((event = [NSApp
+	loop: [NSApp sendEvent: [NSApp
 		nextEventMatchingMask: NSAnyEventMask
-		untilDate:	       date
+		untilDate:	       distant_future
                 inMode:		       NSDefaultRunLoopMode
-                dequeue:	       YES]
-	))
-		{
-		if (event.type == NSEventTypeApplicationDefined && date)
-			{
-			NSLog(@"___________________________");
-			date = nil;
-			}
+                dequeue:	       YES]];
 
-		[NSApp sendEvent: event];
-		}
-	NSLog(@"loop");
 	goto loop;
-
-	//[NSApp run];
 	}
 
 
 void Program::exit()
-	{
-	NSLog(@"exit()");
-	[NSApp	postEvent: [NSEvent
-			otherEventWithType: NSEventTypeApplicationDefined
-			location:	    NSZeroPoint
-			modifierFlags:	    0
-			timestamp:	    0
-			windowNumber:	    -1
-			context:	    nil
-			subtype:	    0
-			data1:		    0
-			data2:		    0]
-		atStart: YES];
-	}
+	{[NSApp terminate: NSApp.delegate];}
 
 
 Zeta::Boolean Program::open_url(const String &url)

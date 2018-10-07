@@ -8,12 +8,10 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Joystick_HPP__
 #define __RUN_Joystick_HPP__
 
-#include <RUN/namespace.hpp>
-#include <Z/classes/base/Value2D.hpp>
+#include <RUN/scope.hpp>
 
-
-namespace RUN {struct Joystick {
-};}
+struct RUN::Joystick {
+};
 
 
 #endif // __RUN_Joystick_HPP__

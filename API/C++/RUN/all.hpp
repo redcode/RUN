@@ -8,6 +8,4 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_all_HPP__
 #define __RUN_all_HPP__
 
-#include <RUN/namespace.hpp>
-
 #endif // __RUN_all_HPP__

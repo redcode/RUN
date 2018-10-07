@@ -8,10 +8,16 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Node_HPP__
 #define __RUN_Node_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 #include <Z/classes/base/Value3D.hpp>
 
-namespace RUN {class RUN_API Node {
+namespace RUN {
+	using Zeta::Boolean;
+	using Zeta::Real;
+	using Zeta::Value3D;
+}
+
+class RUN_API RUN::Node {
 	public:
 	Node*		next;
 	Node*		previous;
@@ -35,6 +41,6 @@ namespace RUN {class RUN_API Node {
 	void enter_transform();
 	void exit_transform();
 	void draw();
-};}
+};
 
 #endif // __RUN_Node_HPP__

@@ -10,33 +10,36 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #include <RUN/Node.hpp>
 
-
-namespace RUN {class RUN_API Scene : public Node {
+class RUN_API RUN::Scene : public Node {
 
 	public:
 
 	struct Transition {
-		typedef Function<void(Scene *from, Scene *to, Real t)> Update;
+		typedef Function<void(Scene *from, Scene *to)>			  Begin;
+		typedef Function<void(Scene *from, Scene *to, Real t)>		  Update;
 		typedef Function<void(Scene *from, Scene *to, Boolean cancelled)> End;
 
+		Begin	begin;
 		Update	update;
 		End	end;
 		Real	duration;
 		Boolean cancel;
 
-		Z_INLINE Transition(Real duration, Update update, End end)
-		: duration(duration), update(update), end(end), cancel(false) {}
+		Z_INLINE Transition(Real duration, Begin begin, Update update, End end)
+		: duration(duration), begin(begin), update(update), end(end), cancel(false) {}
 
 		Z_INLINE Transition(Real duration, Update update)
-		: Transition(duration, update, NULL) {}
+		: Transition(duration, NULL, update, NULL) {}
 	};
+
+	//Shared<Scene> next_scene;
 
 	virtual ~Scene();
 
 	virtual void initialize();
 
 	void update(Real t);
-};}
+};
 
 
 #endif // __RUN_Scene_HPP__

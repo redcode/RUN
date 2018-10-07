@@ -47,8 +47,12 @@ void World::draw()
 
 void World::set_scene(const Shared<Scene> &scene)
 	{
-	this->root_scene = scene;
-	this->scene = this->root_scene.get();
+	this->scene = (this->root_scene = scene).get();
+	}
+
+
+void set_scene(const Shared<Scene> &scene, const Scene::Transition &transition)
+	{
 	}
 
 
@@ -72,12 +76,12 @@ void World::pop_scene(const Scene::Transition &transition)
 	}
 
 
-void World::pop_scene(Natural scene_index)
+void World::pop_scene(Natural stack_level)
 	{
 	}
 
 
-void World::pop_scene(Natural scene_index, const Scene::Transition &transition)
+void World::pop_scene(Natural stack_level, const Scene::Transition &transition)
 	{
 	}
 

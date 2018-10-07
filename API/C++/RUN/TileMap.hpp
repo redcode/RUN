@@ -8,15 +8,19 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_TileMap_HPP__
 #define __RUN_TileMap_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 #include <Z/classes/base/Value2D.hpp>
 
 namespace RUN {
-	typedef UInt16 TileIndex;
+	using Zeta::Natural;
+	using Zeta::Value2D;
+	using Zeta::Real;
+
+	typedef Zeta::UInt16 TileIndex;
 }
 
 
-namespace RUN {class RUN_API TileMap {
+class RUN_API RUN::TileMap {
 	public:
 
 	class Layer {
@@ -27,7 +31,7 @@ namespace RUN {class RUN_API TileMap {
 		public:
 		TileIndex operator[](const Value2D<Natural> &point) const;
 	};
-	
+
 	Array<Layer>  layers;
 	Value2D<Real> tile_size;
 	Value2D<Real> size_in_tiles;
@@ -35,11 +39,10 @@ namespace RUN {class RUN_API TileMap {
 	TileMap(const String &file_path);
 	~TileMap();
 
-
 #	ifdef RUN_TILE_MAP_PRIVATE_PROTOTYPES
-		private: SUGAR_TILE_MAP_PRIVATE_PROTOTYPES
+		private: RUN_TILE_MAP_PRIVATE_PROTOTYPES
 #	endif
-};}
+};
 
 
 #endif // __RUN_TileMap_HPP__

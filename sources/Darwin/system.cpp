@@ -5,10 +5,12 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
+#include <Z/types/base.hpp>
 #include <mach/mach_time.h>
 
 using namespace RUN;
+using namespace Zeta;
 
 static Boolean			 ticks_started = false;
 static UInt64			 start_ticks;

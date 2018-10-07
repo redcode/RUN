@@ -21,13 +21,11 @@
 /* Begin PBXFileReference section */
 		64C6BA791DBCF33000205084 /* libRUN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRUN.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C6BA8D1DBCF57D00205084 /* all.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = all.hpp; sourceTree = "<group>"; };
-		64C6BA8E1DBCF57D00205084 /* configuration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = configuration.hpp; sourceTree = "<group>"; };
-		64C6BA8F1DBCF57D00205084 /* namespace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = namespace.hpp; sourceTree = "<group>"; };
+		64C6BA8E1DBCF57D00205084 /* scope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scope.hpp; sourceTree = "<group>"; };
 		64C6BA901DBCF57D00205084 /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
 		64C6BA911DBCF57D00205084 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		64C6BA921DBCF57D00205084 /* ParticleSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
 		64C6BA931DBCF57D00205084 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
-		64C6BA941DBCF57D00205084 /* RunLoop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RunLoop.hpp; sourceTree = "<group>"; };
 		64C6BA951DBCF57D00205084 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		64C6BA961DBCF57D00205084 /* Screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Screen.hpp; sourceTree = "<group>"; };
 		64C6BA971DBCF57D00205084 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
@@ -70,13 +68,11 @@
 			isa = PBXGroup;
 			children = (
 				64C6BA8D1DBCF57D00205084 /* all.hpp */,
-				64C6BA8E1DBCF57D00205084 /* configuration.hpp */,
-				64C6BA8F1DBCF57D00205084 /* namespace.hpp */,
+				64C6BA8E1DBCF57D00205084 /* scope.hpp */,
 				64C6BA901DBCF57D00205084 /* World.hpp */,
 				64C6BA911DBCF57D00205084 /* Node.hpp */,
 				64C6BA921DBCF57D00205084 /* ParticleSystem.hpp */,
 				64C6BA931DBCF57D00205084 /* Program.hpp */,
-				64C6BA941DBCF57D00205084 /* RunLoop.hpp */,
 				64C6BA951DBCF57D00205084 /* Scene.hpp */,
 				64C6BA961DBCF57D00205084 /* Screen.hpp */,
 				64C6BA971DBCF57D00205084 /* Texture.hpp */,

@@ -67,9 +67,7 @@ static Char const *const ansi_key_names[] {
 
 
 const Char *Keyboard::Key::name() const
-	{
-	return ansi_key_names[scancode];
-	}
+	{return ansi_key_names[scancode];}
 
 
 // common/Keyboard.cpp EOF

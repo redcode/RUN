@@ -8,11 +8,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Video_HPP__
 #define __RUN_Video_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
-
-namespace RUN {class RUN_API Video {
-};}
-
+class RUN_API RUN::Video {
+};
 
 #endif // __RUN_Video_HPP__

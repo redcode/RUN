@@ -8,11 +8,18 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Texture_HPP__
 #define __RUN_Texture_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
 
+namespace RUN {
+	using Zeta::Boolean;
+	using Zeta::Real;
+	using Zeta::Rectangle;
+	using Zeta::UInt8;
+	using Zeta::Value2D;
+}
 
-namespace RUN {class RUN_API Texture {
+class RUN_API RUN::Texture {
 	public:
 
 	enum Format {
@@ -38,7 +45,6 @@ namespace RUN {class RUN_API Texture {
 #	ifdef RUN_TEXTURE_PRIVATE_PROTOTYPES
 		private: RUN_TEXTURE_PRIVATE_PROTOTYPES
 #	endif
-};}
-
+};
 
 #endif // __RUN_Texture_HPP__

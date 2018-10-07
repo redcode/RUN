@@ -112,7 +112,7 @@ using namespace RUN;
 
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT);
-			[_gl_context presentRenderbuffer:GL_RENDERBUFFER];
+			[_gl_context presentRenderbuffer: GL_RENDERBUFFER];
 
 			[EAGLContext setCurrentContext: nil];
 			}

@@ -8,10 +8,13 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Screen_HPP__
 #define __RUN_Screen_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
-namespace RUN  {class RUN_API Screen {
-};}
+class RUN_API RUN::Screen {
 
+	static Screen main_screen();
+	static Array<Screen> all_screens();
+
+};
 
 #endif // __RUN_Screen_HPP__

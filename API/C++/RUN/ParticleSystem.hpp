@@ -8,10 +8,10 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_ParticleSystem_HPP__
 #define __RUN_ParticleSystem_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
-namespace RUN {class RUN_API ParticleSystem {
-};}
+class RUN_API RUN::ParticleSystem {
+};
 
 
 #endif // __RUN_ParticleSystem_HPP__

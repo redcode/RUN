@@ -8,11 +8,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Window_HPP__
 #define __RUN_Window_HPP__
 
-#include <RUN/namespace.hpp>
 #include <RUN/World.hpp>
-#include <Z/classes/base/Value2D.hpp>
 
-namespace RUN {class RUN_API Window {
+class RUN_API RUN::Window {
 	protected:
 	void* native_context;
 
@@ -46,7 +44,6 @@ namespace RUN {class RUN_API Window {
 	Boolean is_maximized();
 	Boolean is_minimized();
 	Boolean is_visible();
-
-};}
+};
 
 #endif // __RUN_Window_HPP__

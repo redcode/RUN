@@ -8,10 +8,10 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Color_HPP__
 #define __RUN_Color_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
 
-namespace RUN {template <class T> struct Color {
+template <class T> struct RUN::Color {
 	T r, g, b, a;
 
 
@@ -34,7 +34,7 @@ namespace RUN {template <class T> struct Color {
 	Z_INLINE static Color white  () {return Color(T(1  ), T(1  ), T(1  ));}
 	Z_INLINE static Color yellow () {return Color(T(1  ), T(1  ), T(0  ));}
 
-};}
+};
 
 
 #endif // __RUN_Color_HPP__

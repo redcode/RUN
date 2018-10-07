@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright © 2016-2018 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
@@ -16,10 +16,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <OpenGL/gl.h>
 #import <OpenGL/OpenGL.h>
 
-#define VIEW ((_RUNGLView *)native_context)
+#define VIEW ((_RUNGLView *)view)
 
 using namespace RUN;
-
 
 @interface _RUNView : NSView {
 	@public
@@ -69,21 +68,18 @@ using namespace RUN;
 
 #	define EVENT_POINT Value2D<Real>([self convertPoint: event.locationInWindow fromView: nil]) * _ppp
 
-	- (void) mouseEntered: (NSEvent *) event {world->mouse_entered(EVENT_POINT);}
-	- (void) mouseExited:  (NSEvent *) event {world->mouse_exited (EVENT_POINT);}
-
-	- (void) mouseDown:	 (NSEvent *) event {world->mouse_down(EVENT_POINT, event.buttonNumber);}
-	- (void) rightMouseDown: (NSEvent *) event {world->mouse_down(EVENT_POINT, event.buttonNumber);}
-	- (void) otherMouseDown: (NSEvent *) event {world->mouse_down(EVENT_POINT, event.buttonNumber);}
-
-	- (void) mouseUp:      (NSEvent *) event {world->mouse_up(EVENT_POINT, event.buttonNumber);}
-	- (void) rightMouseUp: (NSEvent *) event {world->mouse_up(EVENT_POINT, event.buttonNumber);}
-	- (void) otherMouseUp: (NSEvent *) event {world->mouse_up(EVENT_POINT, event.buttonNumber);}
-
-	- (void) mouseMoved:	    (NSEvent *) event {world->mouse_moved(EVENT_POINT);}
-	- (void) mouseDragged:	    (NSEvent *) event {world->mouse_moved(EVENT_POINT);}
-	- (void) rightMouseDragged: (NSEvent *) event {world->mouse_moved(EVENT_POINT);}
-	- (void) otherMouseDragged: (NSEvent *) event {world->mouse_moved(EVENT_POINT);}
+	- (void) mouseEntered:	    (NSEvent *) event {world->mouse_entered(EVENT_POINT);}
+	- (void) mouseExited:	    (NSEvent *) event {world->mouse_exited (EVENT_POINT);}
+	- (void) mouseDown:	    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) rightMouseDown:    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) otherMouseDown:    (NSEvent *) event {world->mouse_down   (EVENT_POINT, event.buttonNumber);}
+	- (void) mouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
+	- (void) rightMouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
+	- (void) otherMouseUp:	    (NSEvent *) event {world->mouse_up	   (EVENT_POINT, event.buttonNumber);}
+	- (void) mouseMoved:	    (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
+	- (void) mouseDragged:	    (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
+	- (void) rightMouseDragged: (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
+	- (void) otherMouseDragged: (NSEvent *) event {world->mouse_moved  (EVENT_POINT);}
 
 #	undef EVENT_POINT
 
@@ -240,15 +236,14 @@ using namespace RUN;
 
 void World::create_view(const Value2D<Real> &size, Backend backend)
 	{
-	native_context = [[_RUNGLView alloc] initWithFrame: size];
-	VIEW->world = this;
+	((_RUNGLView *)(view = [[_RUNGLView alloc] initWithFrame: size]))->world = this;
 	}
 
 
 void World::destroy_view()
 	{
 	[VIEW release];
-	native_context = NULL;
+	view = NULL;
 	}
 
 

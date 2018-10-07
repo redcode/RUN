@@ -2,7 +2,7 @@
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
-Copyright © 2016-2018 Manuel Sainz de Baranda y Goñi.
+Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
 #define Z_USE_NS_GEOMETRY
@@ -15,6 +15,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #define WINDOW_STYLE NSClosableWindowMask | NSMiniaturizableWindowMask | NSTitledWindowMask
 
 using namespace RUN;
+using Zeta::Rectangle;
 
 
 @interface _RUNNativeWindow : NSWindow <NSWindowDelegate> {
@@ -29,7 +30,7 @@ using namespace RUN;
 
 	- (void) windowDidBecomeKey:(id) _ {}
 	- (void) windowDidResignKey:(id) _ {}
-	- (void) windowDidResize: (id) _ {}
+	- (void) windowDidResize: (id) _ {NSLog(@"[NSWindow windowDidResize");}
 	- (void) windowDidMove: (id) _ {}
 	- (void) windowDidMiniaturize:(id) _ {}
 	- (void) windowDidDeminiaturize:(id) _ {}
@@ -75,14 +76,14 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 		}
 
 	[WINDOW setFrame: Rectangle<Real>
-			(screen_frame.point.x + round(screen_frame.size.x - window_size.x) / 2.0,
+			(screen_frame.point.x + round(screen_frame.size.x  - window_size.x) / 2.0,
 			 screen_frame.point.y + floor((screen_frame.size.y - window_size.y) * 2.0 / 3.0),
 			 window_size)
 		display: YES];
 
 	world = new World();
 	world->create_view([WINDOW.contentView frame].size);
-	NSView *view = (NSView *)world->native_context;
+	NSView *view = (NSView *)world->view;
 
 	//view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
 	//[WINDOW.contentView addSubview: view];

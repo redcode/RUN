@@ -26,9 +26,17 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #	include <RUN/Joystick.hpp>
 #endif
 
-namespace RUN {class RUN_API World {
+namespace RUN {
+	using Zeta::Float;
+	using Zeta::Natural;
+	using Zeta::Shared;
+	using Zeta::UInt8;
+	using Zeta::Value2D;
+}
+
+class RUN_API RUN::World {
 	public:
-	void*		  native_context;
+	void*		  view;
 	Value2D<Real>	  size;
 	Shared<Scene>	  root_scene;
 	Scene*		  scene;
@@ -55,21 +63,19 @@ namespace RUN {class RUN_API World {
 	void create_view(const Value2D<Real> &size);
 	void create_view(const Value2D<Real> &size, Backend backend);
 	void destroy_view();
-
 	void set_background_color(const Color<Float> &color);
-
 	void update_geometry();
 	void reset();
 	void update(Real t);
 	void draw();
-
 	void set_scene(const Shared<Scene> &scene);
+	void set_scene(const Shared<Scene> &scene, const Scene::Transition &transition);
 	void push_scene(const Shared<Scene> &scene);
 	void push_scene(const Shared<Scene> &scene, const Scene::Transition &transition);
 	void pop_scene();
 	void pop_scene(const Scene::Transition &transition);
-	void pop_scene(Natural scene_index);
-	void pop_scene(Natural scene_index, const Scene::Transition &transition);
+	void pop_scene(Natural stack_level);
+	void pop_scene(Natural stack_level, const Scene::Transition &transition);
 
 #	if RUN_TARGET_HAS_KEYBOARD
 		//---------------------------------------------------
@@ -155,7 +161,7 @@ namespace RUN {class RUN_API World {
 		void touches_moved();
 		void touches_cancelled();
 #	endif
-};}
+};
 
 
 #endif // __RUN_World_HPP__

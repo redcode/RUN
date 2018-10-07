@@ -8,11 +8,18 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Mouse_HPP__
 #define __RUN_Mouse_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 #include <Z/classes/base/Value2D.hpp>
 
+namespace RUN {
+	using Zeta::Real;
+	using Zeta::UInt8;
+	using Zeta::UInt32;
+	using Zeta::Value2D;
+}
 
-namespace RUN {struct Mouse {
+
+struct RUN::Mouse {
 	Value2D<Real> point;
 	UInt32        button_state;
 
@@ -50,7 +57,7 @@ namespace RUN {struct Mouse {
 		button_state &= ~(UInt32(1) << button);
 		return *this;
 		}
-};}
+};
 
 
 #endif // __RUN_Mouse_HPP__

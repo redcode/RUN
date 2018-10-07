@@ -8,11 +8,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_TextureCache_HPP__
 #define __RUN_TextureCache_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
-
-namespace RUN {class RUN_API TextureCache {
-};}
-
+class RUN_API RUN::TextureCache {
+};
 
 #endif // __RUN_TextureCache_HPP__

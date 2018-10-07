@@ -12,14 +12,13 @@
 		642088A71DAE687B00B8E59C /* Program.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED32C1DA591230088E3F4 /* Program.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088A81DAE687B00B8E59C /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3331DA5BC9D0088E3F4 /* Texture.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088A91DAE687B00B8E59C /* TileMap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3321DA5BC330088E3F4 /* TileMap.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		642088AA1DAE687B00B8E59C /* RunLoop.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3341DA5BD7C0088E3F4 /* RunLoop.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AB1DAE687B00B8E59C /* Screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3281DA588090088E3F4 /* Screen.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AD1DAE687B00B8E59C /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 642088A41DAE686D00B8E59C /* Node.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		642088AF1DAE696A00B8E59C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 642088AE1DAE696A00B8E59C /* Node.cpp */; };
 		6430537E1DBE3F1500BDA4F3 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6430537D1DBE3F1500BDA4F3 /* World.cpp */; };
 		643053801DBE482C00BDA4F3 /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6430537F1DBE482C00BDA4F3 /* system.cpp */; };
 		645233751FCA35AD009EC072 /* ObjCSecret.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 645233741FCA35AD009EC072 /* ObjCSecret.hpp */; };
-		648AF1C21DB5F6DC0007A4CC /* configuration.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 648AF1C11DB5F6DC0007A4CC /* configuration.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		648AF1C21DB5F6DC0007A4CC /* scope.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 648AF1C11DB5F6DC0007A4CC /* scope.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		648F97E91DB41D8A009EA284 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 648F97E71DB41D7A009EA284 /* Scene.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		648F97FC1DB49941009EA284 /* Program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 648F97FB1DB49941009EA284 /* Program.mm */; };
 		648F980A1DB4FBF6009EA284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 648F98091DB4FBF6009EA284 /* Assets.xcassets */; };
@@ -29,7 +28,6 @@
 		64BB512C1DB5138F00E33801 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64BB512B1DB5138F00E33801 /* Program.cpp */; };
 		64BC8E751DB0FFF400226634 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64BC8E741DB0FFF400226634 /* TextureCache.cpp */; };
 		64BC8E771DB1004500226634 /* TextureFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64BC8E761DB1004500226634 /* TextureFrame.cpp */; };
-		64BED31A1DA585CA0088E3F4 /* namespace.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 64BED3191DA585CA0088E3F4 /* namespace.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		64BED31F1DA587750088E3F4 /* Screen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED31E1DA587750088E3F4 /* Screen.mm */; };
 		64BED3211DA5879C0088E3F4 /* World.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED3201DA5879C0088E3F4 /* World.mm */; };
 		64BED3231DA587B10088E3F4 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64BED3221DA587B10088E3F4 /* Window.mm */; };
@@ -59,7 +57,7 @@
 		6430537D1DBE3F1500BDA4F3 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
 		6430537F1DBE482C00BDA4F3 /* system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = system.cpp; sourceTree = "<group>"; };
 		645233741FCA35AD009EC072 /* ObjCSecret.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjCSecret.hpp; sourceTree = "<group>"; };
-		648AF1C11DB5F6DC0007A4CC /* configuration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = configuration.hpp; sourceTree = "<group>"; };
+		648AF1C11DB5F6DC0007A4CC /* scope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scope.hpp; sourceTree = "<group>"; };
 		648F97E71DB41D7A009EA284 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		648F97F91DB4979C009EA284 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		648F97FB1DB49941009EA284 /* Program.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Program.mm; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 		64BC8E741DB0FFF400226634 /* TextureCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureCache.cpp; sourceTree = "<group>"; };
 		64BC8E761DB1004500226634 /* TextureFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureFrame.cpp; sourceTree = "<group>"; };
 		64BED3101DA583B10088E3F4 /* libRUN.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libRUN.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		64BED3191DA585CA0088E3F4 /* namespace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = namespace.hpp; sourceTree = "<group>"; };
 		64BED31E1DA587750088E3F4 /* Screen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Screen.mm; sourceTree = "<group>"; };
 		64BED3201DA5879C0088E3F4 /* World.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = World.mm; sourceTree = "<group>"; };
 		64BED3221DA587B10088E3F4 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Window.mm; sourceTree = "<group>"; };
@@ -85,7 +82,6 @@
 		64BED32F1DA594070088E3F4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		64BED3321DA5BC330088E3F4 /* TileMap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TileMap.hpp; sourceTree = "<group>"; };
 		64BED3331DA5BC9D0088E3F4 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
-		64BED3341DA5BD7C0088E3F4 /* RunLoop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RunLoop.hpp; sourceTree = "<group>"; };
 		64BED3351DA5C1C40088E3F4 /* TileMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMap.cpp; sourceTree = "<group>"; };
 		64BED3371DA5C6180088E3F4 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		64C6BA691DBCEA6F00205084 /* Program.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Program.mm; sourceTree = "<group>"; };
@@ -196,8 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				649A0E0B1DBCCA1800EE7D46 /* all.hpp */,
-				648AF1C11DB5F6DC0007A4CC /* configuration.hpp */,
-				64BED3191DA585CA0088E3F4 /* namespace.hpp */,
+				648AF1C11DB5F6DC0007A4CC /* scope.hpp */,
 				64F7AFA81DC45EF4001845E4 /* Backend.hpp */,
 				64EE8A731DCEE6D500780976 /* Color.hpp */,
 				64F70E981DCA86F100DA3802 /* Mouse.hpp */,
@@ -206,7 +201,6 @@
 				642088A41DAE686D00B8E59C /* Node.hpp */,
 				64E28FAA1DB2193100D1C245 /* ParticleSystem.hpp */,
 				64BED32C1DA591230088E3F4 /* Program.hpp */,
-				64BED3341DA5BD7C0088E3F4 /* RunLoop.hpp */,
 				648F97E71DB41D7A009EA284 /* Scene.hpp */,
 				64BED3281DA588090088E3F4 /* Screen.hpp */,
 				64BED3331DA5BC9D0088E3F4 /* Texture.hpp */,
@@ -300,13 +294,11 @@
 				64F512711DC93C360015BF34 /* Keyboard.hpp in Headers */,
 				64E28FA71DB2187500D1C245 /* TextureFrame.hpp in Headers */,
 				642088A51DAE687700B8E59C /* Window.hpp in Headers */,
-				648AF1C21DB5F6DC0007A4CC /* configuration.hpp in Headers */,
+				648AF1C21DB5F6DC0007A4CC /* scope.hpp in Headers */,
 				64F7AFA91DC45EF4001845E4 /* Backend.hpp in Headers */,
-				64BED31A1DA585CA0088E3F4 /* namespace.hpp in Headers */,
 				645233751FCA35AD009EC072 /* ObjCSecret.hpp in Headers */,
 				64F70E9B1DCAD3F300DA3802 /* Joystick.hpp in Headers */,
 				64EE8A741DCEE6D500780976 /* Color.hpp in Headers */,
-				642088AA1DAE687B00B8E59C /* RunLoop.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

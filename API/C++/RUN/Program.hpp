@@ -9,14 +9,9 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #define __RUN_Program_HPP__
 
 #include <RUN/World.hpp>
-#include <Z/inspection/OS.h>
 
-namespace RUN {class RUN_API Program {
+class RUN_API RUN::Program {
 	protected:
-#	if Z_OS == Z_OS_MACOS || Z_OS == Z_OS_IOS
-		void* _native_context;
-#	endif
-
 	Array<World *> _active_worlds;
 
 	public:
@@ -31,7 +26,9 @@ namespace RUN {class RUN_API Program {
 	//------------------------------------------------
 	int argc;
 
+	//-----------------------------------------------
 	/// The array of arguments passed to the program.
+	//-----------------------------------------------
 	char** argv;
 
 	//------------------------------------------------------------
@@ -49,17 +46,12 @@ namespace RUN {class RUN_API Program {
 	//------------------------------------
 	/// Enters to the program's main loop.
 	//------------------------------------
-	void run();
+	Z_NO_RETURN void run();
 
 	//--------------------------------
 	/// Exits the program's main loop.
 	//--------------------------------
 	void exit();
-
-	//-------------------------------------------------------------
-	/// Exits the program's main loop, causing the program to quit.
-	//-------------------------------------------------------------
-	void quit();
 
 	void schedule_world(World *world);
 	void unschedule_world(World *world);
@@ -90,6 +82,11 @@ namespace RUN {class RUN_API Program {
 	//----------------------------------------------
 	virtual String version();
 
+	//--------------------------------------------------------------------
+	/// Gets the operating system's locale language.
+	/// @return A string with the ISO 639-1 code of the operating system's
+	/// locale language in lower case.
+	//--------------------------------------------------------------------
 	virtual String locale_language();
 
 	//-----------------------------------
@@ -126,6 +123,6 @@ namespace RUN {class RUN_API Program {
 	/// Called before quitting the program.
 	//-------------------------------------
 	virtual void will_quit();
-};}
+};
 
 #endif // __RUN_Program_HPP__

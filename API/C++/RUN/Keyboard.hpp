@@ -8,10 +8,22 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Keyboard_HPP__
 #define __RUN_Keyboard_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
+#include <Z/types/base.hpp>
 #include <Z/formats/keymap/Z.h>
 
-namespace RUN {struct Keyboard {
+namespace RUN {
+	using Zeta::Boolean;
+	using Zeta::Char;
+	using Zeta::UInt8;
+	using Zeta::UInt64;
+
+#	ifdef Z_UINT128
+		using Zeta::UInt128;
+#	endif
+}
+
+struct RUN::Keyboard {
 
 	struct RUN_API Key {
 		enum {	Up			   = Z_KEY_CODE_UP,
@@ -191,6 +203,6 @@ namespace RUN {struct Keyboard {
 		state[key / 8] &= ~(1 << (key % 8));
 		return *this;
 		}
-};}
+};
 
 #endif // __RUN_Keyboard_HPP__

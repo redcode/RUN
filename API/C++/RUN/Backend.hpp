@@ -8,7 +8,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #ifndef __RUN_Backend_HPP__
 #define __RUN_Backend_HPP__
 
-#include <RUN/namespace.hpp>
+#include <RUN/scope.hpp>
 
 namespace RUN {
 

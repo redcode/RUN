@@ -30,7 +30,7 @@ static NSAutoreleasePool *pool;
 	- (BOOL) application:			 (_RUNApplication *) application
 		 willFinishLaunchingWithOptions: (NSDictionary	  *) optiona
 		{
-		[application setStatusBarStyle: UIStatusBarStyleDefault];
+		application.statusBarStyle = UIStatusBarStyleDefault;
 		Program::singleton->will_start();
 		return YES;
 		}
@@ -313,4 +313,3 @@ Zeta::Boolean Program::open_url(const String &url)
 
 
 // UIKit/Program.mm
-

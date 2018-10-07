@@ -1,12 +1,12 @@
-/* RUN Kit C++ API - configuration.hpp
+/* RUN Kit C++ API - scope.hpp
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_configuration_HPP__
-#define __RUN_configuration_HPP__
+#ifndef __RUN_scope_HPP__
+#define __RUN_scope_HPP__
 
 #include <Z/macros/language.h>
 #include <Z/inspection/OS.h>
@@ -67,4 +67,41 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #	define RUN_TARGET_HAS_MULTITOUCH FALSE
 #endif
 
-#endif // __RUN_configuration_HPP__
+#include <string>
+#include <vector>
+#include <functional>
+
+namespace RUN {
+
+	using String = std::string;
+	template <class T> using Function = ::std::function<T>;
+	template <class T> using Array	  = ::std::vector<T>;
+
+	template <class T> struct Matrix4x4 {
+		T m[4 * 4];
+	};
+
+	template <class T> struct Color;
+
+	class Camera;
+	//struct KeyCode;
+	struct Keyboard;
+	struct Mouse;
+	struct Joystick;
+	struct Touch;
+	class Layer;
+	class Node;
+	class ParticleSystem;
+	class Program;
+	class Scene;
+	class Screen; // Trait in Nintendo 3DS
+	class Texture;
+	class TextureFrame;
+	class TextureCache;
+	class TileMap;
+	class Video;
+	class Window;
+	class World;
+}
+
+#endif // __RUN_scope_HPP__
