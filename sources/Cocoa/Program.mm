@@ -74,6 +74,9 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 		toTarget:		 _RUNApplicationDelegate.class
 		withObject:		 nil];
 
+	if (![NSThread isMultiThreaded])
+		NSLog(@"WARNING: Cocoa failed to enter in multithreading state.");
+
 	//-----------------------------------------------------------------------------.
 	// Ensure the application can be focused at launch even without a default XIB. |
 	//-----------------------------------------------------------------------------'
