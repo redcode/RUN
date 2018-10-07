@@ -66,16 +66,16 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	pool = [[NSAutoreleasePool alloc] init];
 	[NSApplication sharedApplication];
 
-	//----------------------------------------------.
-	// Ensure Cocoa enters in multithreading state. |
-	//----------------------------------------------'
+	//------------------------------------------.
+	// Ensure Cocoa enters multithreading mode. |
+	//------------------------------------------'
 	[NSThread
 		detachNewThreadSelector: @selector(nop:)
 		toTarget:		 _RUNApplicationDelegate.class
 		withObject:		 nil];
 
 	if (![NSThread isMultiThreaded])
-		NSLog(@"WARNING: Cocoa failed to enter in multithreading state.");
+		NSLog(@"WARNING: Cocoa failed to enter multithreading mode.");
 
 	//-----------------------------------------------------------------------------.
 	// Ensure the application can be focused at launch even without a default XIB. |
