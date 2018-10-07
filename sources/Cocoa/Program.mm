@@ -74,13 +74,6 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 		toTarget:		 _RUNApplicationDelegate.class
 		withObject:		 nil];
 
-	if (![NSThread isMultiThreaded])
-		{
-		NSLog(@"ERROR: Cocoa failed to enter multithreading mode.");
-		[autorelease_pool drain];
-		exit(-1);
-		}
-
 	//-----------------------------------------------------------------------------.
 	// Ensure the application can be focused at launch even without a default XIB. |
 	//-----------------------------------------------------------------------------'
