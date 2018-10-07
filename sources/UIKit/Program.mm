@@ -288,10 +288,6 @@ void Program::run()
 	{UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");}
 
 
-void Program::quit()
-	{
-	}
-
 
 /*String Program::resources_path()
 	{
