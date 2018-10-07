@@ -48,10 +48,12 @@ class RUN_API RUN::Program {
 	//------------------------------------
 	Z_NO_RETURN void run();
 
-	//--------------------------------
-	/// Exits the program's main loop.
-	//--------------------------------
-	void exit();
+#	if RUN_TARGET_IS_QUITABLE
+		//-------------------------------------------------------------
+		/// Exits the program's main loop, causing the program to quit.
+		//-------------------------------------------------------------
+		void quit();
+#	endif
 
 	void schedule_world(World *world);
 	void unschedule_world(World *world);

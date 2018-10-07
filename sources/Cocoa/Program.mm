@@ -217,7 +217,7 @@ Z_NO_RETURN void Program::run()
 	}
 
 
-void Program::exit()
+void Program::quit()
 	{[NSApp terminate: NSApp.delegate];}
 
 

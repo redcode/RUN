@@ -24,6 +24,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #if Z_OS == Z_OS_MACOS || Z_OS == Z_OS_LINUX || Z_OS == Z_OS_WINDOWS
 
+#	define RUN_TARGET_IS_QUITABLE  TRUE
 #	define RUN_TARGET_IS_WINDOWED  TRUE
 #	define RUN_TARGET_HAS_KEYBOARD TRUE
 #	define RUN_TARGET_HAS_MOUSE    TRUE
@@ -49,6 +50,10 @@ Released under the terms of the GNU Lesser General Public License v3. */
 
 #ifndef RUN_TARGET_IS_WINDOWED
 #	define RUN_TARGET_IS_WINDOWED FALSE
+#endif
+
+#ifndef RUN_TARGET_IS_QUITABLE
+#	define RUN_TARGET_IS_QUITABLE FALSE
 #endif
 
 #ifndef RUN_TARGET_HAS_KEYBOARD

@@ -288,7 +288,7 @@ void Program::run()
 	{UIApplicationMain(argc, argv, @"_RUNApplication", @"_RUNApplicationDelegate");}
 
 
-void Program::exit()
+void Program::quit()
 	{
 	}
 
