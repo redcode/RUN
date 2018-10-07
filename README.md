@@ -20,7 +20,6 @@ In alphabetical order:
 * iOS
 * Linux
 * macOS
-* Nintendo 3DS
 * Nintendo Switch
 * tvOS
 * Windows
