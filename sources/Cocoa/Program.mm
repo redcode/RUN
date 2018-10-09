@@ -30,11 +30,11 @@ using namespace RUN;
 		}
 
 
-	- (void) applicationDidFinishLaunching:	 (id) _ {Program::singleton->did_start		  ();}
-	- (void) applicationWillResignActive:	 (id) _ {Program::singleton->will_enter_background();}
-	- (void) applicationDidResignActive:	 (id) _ {Program::singleton->did_enter_background ();}
-	- (void) applicationWillBecomeActive:	 (id) _ {Program::singleton->will_enter_foreground();}
-	- (void) applicationDidBecomeActive:	 (id) _ {Program::singleton->did_enter_foreground ();}
+	- (void) applicationDidFinishLaunching:	(id) _ {Program::singleton->did_start		 ();}
+	- (void) applicationWillResignActive:	(id) _ {Program::singleton->will_enter_background();}
+	- (void) applicationDidResignActive:	(id) _ {Program::singleton->did_enter_background ();}
+	- (void) applicationWillBecomeActive:	(id) _ {Program::singleton->will_enter_foreground();}
+	- (void) applicationDidBecomeActive:	(id) _ {Program::singleton->did_enter_foreground ();}
 
 
 	- (void) applicationWillTerminate: (id) _
@@ -206,6 +206,7 @@ Program::~Program()
 	NSLog(@"count => %lu", application_delegate.retainCount);
 	[application_delegate release];
 	[autorelease_pool drain];
+	autorelease_pool = NULL;
 	Program::singleton = NULL;
 	}
 
