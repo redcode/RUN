@@ -33,7 +33,7 @@
 		64C6BA6C1DBCEA9700205084 /* Program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64C6BA6B1DBCEA9700205084 /* Program.mm */; };
 		64EE8A721DCEA50C00780976 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64EE8A711DCEA50C00780976 /* Scene.cpp */; };
 		64F70E9D1DCAD66800DA3802 /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64F70E9C1DCAD66800DA3802 /* system.cpp */; };
-		64F70E9F1DCAD68A00DA3802 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64F70E9E1DCAD68A00DA3802 /* World.cpp */; };
+		64F70E9F1DCAD68A00DA3802 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 64F70E9E1DCAD68A00DA3802 /* View.cpp */; };
 		64F70EB71DCAEAC500DA3802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F70EB61DCAEAC500DA3802 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +67,7 @@
 		648F97CD1DB41AFB009EA284 /* Video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video.cpp; sourceTree = "<group>"; };
 		648F97D51DB41B0A009EA284 /* Screen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Screen.mm; sourceTree = "<group>"; };
 		648F97D61DB41B0A009EA284 /* World.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = World.mm; sourceTree = "<group>"; };
-		648F97D91DB41B7E009EA284 /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
+		648F97D91DB41B7E009EA284 /* View.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		648F97DB1DB41B7E009EA284 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		648F97DC1DB41B7E009EA284 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
 		648F97DD1DB41B7E009EA284 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		64C6BA6B1DBCEA9700205084 /* Program.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Program.mm; sourceTree = "<group>"; };
 		64EE8A711DCEA50C00780976 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		64F70E9C1DCAD66800DA3802 /* system.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = system.cpp; sourceTree = "<group>"; };
-		64F70E9E1DCAD68A00DA3802 /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = World.cpp; sourceTree = "<group>"; };
+		64F70E9E1DCAD68A00DA3802 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
 		64F70EA01DCAE73100DA3802 /* Backend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Backend.hpp; sourceTree = "<group>"; };
 		64F70EA81DCAEAC400DA3802 /* RUN Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RUN Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F70EB61DCAEAC500DA3802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				648F97CB1DB41AFB009EA284 /* TextureFrame.cpp */,
 				648F97CC1DB41AFB009EA284 /* TileMap.cpp */,
 				648F97CD1DB41AFB009EA284 /* Video.cpp */,
-				64F70E9E1DCAD68A00DA3802 /* World.cpp */,
+				64F70E9E1DCAD68A00DA3802 /* View.cpp */,
 			);
 			name = Common;
 			path = common;
@@ -225,11 +225,11 @@
 				648F97E21DB41B7E009EA284 /* TextureFrame.hpp */,
 				648F97E31DB41B7E009EA284 /* TileMap.hpp */,
 				648F97E41DB41B7E009EA284 /* Video.hpp */,
-				648F97D91DB41B7E009EA284 /* World.hpp */,
+				648F97D91DB41B7E009EA284 /* View.hpp */,
 				648F97E61DB41B7E009EA284 /* Window.hpp */,
 			);
 			name = API;
-			path = "../../API/C++/RUN";
+			path = ../../API/RUN;
 			sourceTree = "<group>";
 		};
 		648F97C51DB41AAE009EA284 /* Sources */ = {
@@ -369,7 +369,7 @@
 				648F97D31DB41AFB009EA284 /* TileMap.cpp in Sources */,
 				64F70E9D1DCAD66800DA3802 /* system.cpp in Sources */,
 				64AE90141DCB133800654D0F /* Window.mm in Sources */,
-				64F70E9F1DCAD68A00DA3802 /* World.cpp in Sources */,
+				64F70E9F1DCAD68A00DA3802 /* View.cpp in Sources */,
 				648F97D41DB41AFB009EA284 /* Video.cpp in Sources */,
 				64C6BA6C1DBCEA9700205084 /* Program.mm in Sources */,
 				648F97CE1DB41AFB009EA284 /* Node.cpp in Sources */,
@@ -424,9 +424,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../API/C++",
+					../../API,
 					/usr/local/include,
-					"/usr/local/include/C++",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -466,9 +465,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../API/C++",
+					../../API,
 					/usr/local/include,
-					"/usr/local/include/C++",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

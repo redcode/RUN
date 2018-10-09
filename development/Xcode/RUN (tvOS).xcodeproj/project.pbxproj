@@ -22,7 +22,7 @@
 		64C6BA791DBCF33000205084 /* libRUN.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRUN.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		64C6BA8D1DBCF57D00205084 /* all.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = all.hpp; sourceTree = "<group>"; };
 		64C6BA8E1DBCF57D00205084 /* scope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scope.hpp; sourceTree = "<group>"; };
-		64C6BA901DBCF57D00205084 /* World.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = World.hpp; sourceTree = "<group>"; };
+		64C6BA901DBCF57D00205084 /* View.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		64C6BA911DBCF57D00205084 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		64C6BA921DBCF57D00205084 /* ParticleSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
 		64C6BA931DBCF57D00205084 /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			children = (
 				64C6BA8D1DBCF57D00205084 /* all.hpp */,
 				64C6BA8E1DBCF57D00205084 /* scope.hpp */,
-				64C6BA901DBCF57D00205084 /* World.hpp */,
+				64C6BA901DBCF57D00205084 /* View.hpp */,
 				64C6BA911DBCF57D00205084 /* Node.hpp */,
 				64C6BA921DBCF57D00205084 /* ParticleSystem.hpp */,
 				64C6BA931DBCF57D00205084 /* Program.hpp */,
@@ -83,7 +83,7 @@
 				64C6BA9D1DBCF57D00205084 /* Window.hpp */,
 			);
 			name = API;
-			path = "../../API/C++/RUN";
+			path = ../../API/RUN;
 			sourceTree = "<group>";
 		};
 		64C6BA8C1DBCF55F00205084 /* Sources */ = {

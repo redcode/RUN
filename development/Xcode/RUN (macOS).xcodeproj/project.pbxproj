@@ -215,7 +215,7 @@
 				64BED3291DA588150088E3F4 /* Window.hpp */,
 			);
 			name = API;
-			path = "../../API/C++/RUN";
+			path = ../../API/RUN;
 			sourceTree = "<group>";
 		};
 		64BED31C1DA5870B0088E3F4 /* Cocoa */ = {
@@ -489,8 +489,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../API/C++",
-					"/usr/local/include/C++",
+					../../API,
 					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -530,8 +529,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"../../API/C++",
-					"/usr/local/include/C++",
+					../../API,
 					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
