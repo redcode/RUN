@@ -24,7 +24,7 @@ String Program::name()
 	NSString *name;
 	auto string_class = NSString.class;
 
-	for (UInt i = sizeof(name_keys) / sizeof(NSString *); i;) if (
+	for (UInt i = sizeof(name_keys) / sizeof(name_keys[0]); i;) if (
 		(name = [bundle objectForInfoDictionaryKey: name_keys[--i]])
 		&& [name isKindOfClass: string_class]
 		&& name.length
