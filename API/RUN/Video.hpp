@@ -5,12 +5,12 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_Video_HPP__
-#define __RUN_Video_HPP__
+#ifndef _RUN_Video_HPP_
+#define _RUN_Video_HPP_
 
 #include <RUN/scope.hpp>
 
 class RUN_API RUN::Video {
 };
 
-#endif // __RUN_Video_HPP__
+#endif // _RUN_Video_HPP_

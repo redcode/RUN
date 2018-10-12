@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_Texture_HPP__
-#define __RUN_Texture_HPP__
+#ifndef _RUN_Texture_HPP_
+#define _RUN_Texture_HPP_
 
 #include <RUN/scope.hpp>
 #include <Z/classes/mathematics/geometry/euclidean/Rectangle.hpp>
@@ -47,4 +47,4 @@ class RUN_API RUN::Texture {
 #	endif
 };
 
-#endif // __RUN_Texture_HPP__
+#endif // _RUN_Texture_HPP_

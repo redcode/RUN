@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_scope_HPP__
-#define __RUN_scope_HPP__
+#ifndef _RUN_scope_HPP_
+#define _RUN_scope_HPP_
 
 #include <Z/macros/language.h>
 #include <Z/inspection/OS.h>
@@ -111,4 +111,4 @@ namespace RUN {
 	class Window;
 }
 
-#endif // __RUN_scope_HPP__
+#endif // _RUN_scope_HPP_

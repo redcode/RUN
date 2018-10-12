@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_Scene_HPP__
-#define __RUN_Scene_HPP__
+#ifndef _RUN_Scene_HPP_
+#define _RUN_Scene_HPP_
 
 #include <RUN/Node.hpp>
 
@@ -42,4 +42,4 @@ class RUN_API RUN::Scene : public Node {
 };
 
 
-#endif // __RUN_Scene_HPP__
+#endif // _RUN_Scene_HPP_

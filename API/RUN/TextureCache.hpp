@@ -5,12 +5,12 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_TextureCache_HPP__
-#define __RUN_TextureCache_HPP__
+#ifndef _RUN_TextureCache_HPP_
+#define _RUN_TextureCache_HPP_
 
 #include <RUN/scope.hpp>
 
 class RUN_API RUN::TextureCache {
 };
 
-#endif // __RUN_TextureCache_HPP__
+#endif // _RUN_TextureCache_HPP_

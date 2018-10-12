@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_TileMap_HPP__
-#define __RUN_TileMap_HPP__
+#ifndef _RUN_TileMap_HPP_
+#define _RUN_TileMap_HPP_
 
 #include <RUN/scope.hpp>
 #include <Z/classes/base/Value2D.hpp>
@@ -45,4 +45,4 @@ class RUN_API RUN::TileMap {
 };
 
 
-#endif // __RUN_TileMap_HPP__
+#endif // _RUN_TileMap_HPP_

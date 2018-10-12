@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_Screen_HPP__
-#define __RUN_Screen_HPP__
+#ifndef _RUN_Screen_HPP_
+#define _RUN_Screen_HPP_
 
 #include <RUN/scope.hpp>
 
@@ -17,4 +17,4 @@ class RUN_API RUN::Screen {
 
 };
 
-#endif // __RUN_Screen_HPP__
+#endif // _RUN_Screen_HPP_

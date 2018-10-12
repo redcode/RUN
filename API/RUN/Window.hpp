@@ -5,8 +5,8 @@
 Copyright (C) 2016-2018 Manuel Sainz de Baranda y Goñi.
 Released under the terms of the GNU Lesser General Public License v3. */
 
-#ifndef __RUN_Window_HPP__
-#define __RUN_Window_HPP__
+#ifndef _RUN_Window_HPP_
+#define _RUN_Window_HPP_
 
 #include <RUN/View.hpp>
 
@@ -46,4 +46,4 @@ class RUN_API RUN::Window {
 	Boolean is_visible();
 };
 
-#endif // __RUN_Window_HPP__
+#endif // _RUN_Window_HPP_
