@@ -9,6 +9,7 @@ Released under the terms of the GNU Lesser General Public License v3. */
 #import <RUN/Window.hpp>
 #import <Cocoa/Cocoa.h>
 #import <stdlib.h>
+#import "macOS.h"
 
 using namespace RUN;
 
@@ -138,7 +139,9 @@ Program::Program(int argc, char **argv) : argc(argc), argv(argv)
 	// properly on Leopard and older versions of macOS. |
 	//--------------------------------------------------'
 #	if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_6
-		[NSApp performSelector: NSSelectorFromString(@"setAppleMenu:") withObject: menu];
+		if (MACOS_VERSION < MACOS_SNOW_LEOPARD) [NSApp
+			performSelector: NSSelectorFromString(@"setAppleMenu:")
+			withObject:	 menu];
 #	endif
 
 	//---------------------------.

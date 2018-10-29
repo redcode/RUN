@@ -37,6 +37,7 @@ using namespace RUN;
 		_owner->update_geometry();
 		}
 
+
 	- (BOOL) acceptsFirstResponder {return YES;}
 	- (BOOL) canBecomeKeyView      {return YES;}
 	- (BOOL) isOpaque	       {return YES;}
