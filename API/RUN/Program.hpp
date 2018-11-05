@@ -57,8 +57,8 @@ class RUN_API RUN::Program {
 		void quit();
 #	endif
 
-	void schedule_view(View *world);
-	void unschedule_view(View *world);
+	void schedule_view(View *view);
+	void unschedule_view(View *view);
 
 	//------------------------------------------------------------
 	/// Opens an URL using the operating system's default browser.

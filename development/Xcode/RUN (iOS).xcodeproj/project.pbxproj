@@ -24,7 +24,7 @@
 		648F97D31DB41AFB009EA284 /* TileMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 648F97CC1DB41AFB009EA284 /* TileMap.cpp */; };
 		648F97D41DB41AFB009EA284 /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 648F97CD1DB41AFB009EA284 /* Video.cpp */; };
 		648F97D71DB41B0A009EA284 /* Screen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 648F97D51DB41B0A009EA284 /* Screen.mm */; };
-		648F97D81DB41B0A009EA284 /* World.mm in Sources */ = {isa = PBXBuildFile; fileRef = 648F97D61DB41B0A009EA284 /* World.mm */; };
+		648F97D81DB41B0A009EA284 /* View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 648F97D61DB41B0A009EA284 /* View.mm */; };
 		649A0E111DBCCF1F00EE7D46 /* Program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 649A0E101DBCCF1F00EE7D46 /* Program.mm */; };
 		649A0E131DBCD26000EE7D46 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 649A0E121DBCD26000EE7D46 /* Program.cpp */; };
 		64AE900F1DCAF99E00654D0F /* libRUN.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 648F97B81DB419D6009EA284 /* libRUN.a */; };
@@ -66,7 +66,7 @@
 		648F97CC1DB41AFB009EA284 /* TileMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileMap.cpp; sourceTree = "<group>"; };
 		648F97CD1DB41AFB009EA284 /* Video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video.cpp; sourceTree = "<group>"; };
 		648F97D51DB41B0A009EA284 /* Screen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Screen.mm; sourceTree = "<group>"; };
-		648F97D61DB41B0A009EA284 /* World.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = World.mm; sourceTree = "<group>"; };
+		648F97D61DB41B0A009EA284 /* View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = View.mm; sourceTree = "<group>"; };
 		648F97D91DB41B7E009EA284 /* View.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		648F97DB1DB41B7E009EA284 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		648F97DC1DB41B7E009EA284 /* ParticleSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleSystem.hpp; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 			children = (
 				6452337A1FCA500C009EC072 /* _RUNView.h */,
 				648F97D51DB41B0A009EA284 /* Screen.mm */,
-				648F97D61DB41B0A009EA284 /* World.mm */,
+				648F97D61DB41B0A009EA284 /* View.mm */,
 				649A0E101DBCCF1F00EE7D46 /* Program.mm */,
 				64AE90131DCB133800654D0F /* Window.mm */,
 			);
@@ -359,7 +359,7 @@
 			files = (
 				649A0E111DBCCF1F00EE7D46 /* Program.mm in Sources */,
 				649A0E131DBCD26000EE7D46 /* Program.cpp in Sources */,
-				648F97D81DB41B0A009EA284 /* World.mm in Sources */,
+				648F97D81DB41B0A009EA284 /* View.mm in Sources */,
 				648F97D01DB41AFB009EA284 /* Texture.cpp in Sources */,
 				648F97D71DB41B0A009EA284 /* Screen.mm in Sources */,
 				648F97CF1DB41AFB009EA284 /* ParticleSystem.cpp in Sources */,

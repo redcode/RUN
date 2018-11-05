@@ -138,7 +138,7 @@ static NSAutoreleasePool *pool;
 	// In the absence of more detailed research, the iOS keyboard map |
 	// appears to be the one specified in the USB standard.		  |
 	//----------------------------------------------------------------'
-#	import <Z/hardware/BUS/USB.h>
+#	import <Z/hardware/bus/USB.h>
 #	import <Z/formats/keymap/Z.h>
 
 	static zuint8 const keymap[0xE8] = {Z_ARRAY_CONTENT_USB_KEY_CODE_TO_Z_KEY_CODE};
@@ -158,9 +158,9 @@ static NSAutoreleasePool *pool;
 			if (key_code < 0xE8)
 				{
 				if ($_isKeyDown(event))
-					first_responder->world->key_down(keymap[key_code]);
+					first_responder->view->key_down(keymap[key_code]);
 
-				else first_responder->world->key_up(keymap[key_code]);
+				else first_responder->view->key_up(keymap[key_code]);
 				}
 			}
 
@@ -205,12 +205,12 @@ static NSAutoreleasePool *pool;
 					{
 					case GS_EVENT_TYPE_KEY_DOWN:
 					if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
-						first_responder->world->key_down(keymap[key_code]);
+						first_responder->view->key_down(keymap[key_code]);
 					break;
 
 					case GS_EVENT_TYPE_KEY_UP:
 					if ((key_code = UniChar(event_memory[GS_EVENT_OFFSET_KEY_CODE])) < 0xE8)
-						first_responder->world->key_up(keymap[key_code]);
+						first_responder->view->key_up(keymap[key_code]);
 					break;
 
 					case GS_EVENT_TYPE_MODIFIER_KEYS_CHANGED:

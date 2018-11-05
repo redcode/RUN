@@ -22,8 +22,8 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 	native_context = [[UIWindow alloc] initWithFrame: UIScreen.mainScreen.bounds];
 	auto root_view_controller = [[UIViewController alloc] init];
 
-	world = new World();
-	world->create_view(size);
+	view = new View();
+	view->create_view(size);
 	root_view_controller.view = (UIView *)world->view;
 	//WINDOW.backgroundColor = [UIColor greenColor];
 	WINDOW.rootViewController = root_view_controller;

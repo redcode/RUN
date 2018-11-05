@@ -1,4 +1,4 @@
-/* RUN - UIKit/World.mm
+/* RUN - UIKit/View.mm
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
@@ -26,7 +26,7 @@ using namespace RUN;
 		 withEvent:    (UIEvent *) event
 		{
 		NSLog(@"touchesBegan");
-		world->touches_down();
+		view->touches_down();
 		}
 
 
@@ -34,7 +34,7 @@ using namespace RUN;
 		 withEvent:    (UIEvent *) event
 		{
 		NSLog(@"touchesBegan");
-		world->touches_moved();
+		view->touches_moved();
 		}
 
 
@@ -42,7 +42,7 @@ using namespace RUN;
 		 withEvent:    (UIEvent *) event
 		{
 		NSLog(@"touchesEnded");
-		world->touches_up();
+		view->touches_up();
 		}
 
 
@@ -50,7 +50,7 @@ using namespace RUN;
 		 withEvent:	   (UIEvent *) event
 		{
 		NSLog(@"touchesCancelled");
-		world->touches_cancelled();
+		view->touches_cancelled();
 		}
 
 
@@ -142,18 +142,18 @@ using namespace RUN;
 @end
 
 
-void World::create_view(const Value2D<Real> &size, Backend backend)
+void View::create_view(const Value2D<Real> &size, Backend backend)
 	{
 	view = [[_RUNGLView alloc] initWithFrame: size];
-	VIEW->world = this;
+	VIEW->view = this;
 	}
 
 
-void World::destroy_view()
+void View::destroy_view()
 	{
 	[VIEW release];
 	view = NULL;
 	}
 
 
-// UIKit/World.mm
+// UIKit/View.mm

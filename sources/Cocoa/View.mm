@@ -1,4 +1,4 @@
-/* RUN - Cocoa/World.mm
+/* RUN - Cocoa/View.mm
   _____  __ ______  ___
  /   - )/  /  /   \/  /
 /__/\__/_____/__/\___/ Kit
@@ -233,7 +233,7 @@ using namespace RUN;
 @end
 
 
-void View::create_view(const Value2D<Real> &size, Backend backend)
+void View::create_native_view(const Value2D<Real> &size, Backend backend)
 	{
 	((_RUNGLView *)(native = [[_RUNGLView alloc] initWithFrame: size]))->_owner = this;
 	}

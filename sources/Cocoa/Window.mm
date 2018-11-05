@@ -83,7 +83,7 @@ Window::Window(const Value2D<Real> &size, Mode mode)
 		display: YES];
 
 	view = new View();
-	view->create_view([NATIVE_WINDOW.contentView frame].size);
+	view->create_native_view([NATIVE_WINDOW.contentView frame].size);
 
 	//view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
 	//[WINDOW.contentView addSubview: (NSView *)view->native];

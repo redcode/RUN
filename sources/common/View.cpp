@@ -21,8 +21,8 @@ View::~View()
 	}
 
 
-void View::create_view(const Value2D<Real> &size)
-	{create_view(size, Backend::Default);}
+void View::create_native_view(const Value2D<Real> &size)
+	{create_native_view(size, Backend::Default);}
 
 
 void View::update_geometry()
